@@ -30,5 +30,4 @@ public class Grid extends Group
             getChildren().add(verticalLine);
         }
     }
-
 }
