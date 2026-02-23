@@ -7,7 +7,6 @@ import com.nihal.nbodyproblem.Body.Body;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -16,6 +15,7 @@ public class StartAnimation extends Application {
     @Override
     public void start(Stage stage) {
         Pane world = new Pane();
+        world.setStyle("-fx-background-color: black;");
 
         Grid grid = new Grid();
         world.getChildren().add(grid);
@@ -27,17 +27,15 @@ public class StartAnimation extends Application {
             if (numOfBodies[0] == Constants.N)
                 return;
             bodies[numOfBodies[0]] = new Body(event.getX(), event.getY());
+
             world.getChildren().add(bodies[numOfBodies[0]]);
             numOfBodies[0]++;
         });
 
 
 
-
-
-
         stage.setTitle("Circle Simulation");
-        stage.setScene(new Scene(world, Constants.worldWidth, Constants.worldHeight ,Color.BLACK));
+        stage.setScene(new Scene(world, Constants.worldWidth, Constants.worldHeight));
         stage.show();
     }
 }
