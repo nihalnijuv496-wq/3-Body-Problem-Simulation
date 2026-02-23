@@ -1,8 +1,8 @@
-#3BodyProblem
+# 3BodyProblem
 
 A JavaFX-based simulation project inspired by the classical Three-Body Problem in physics.
 
-##Current Features
+## Current Features
 
 -Displays a gridded simulation window
 -Mouse click opens a popup form
@@ -14,7 +14,7 @@ A JavaFX-based simulation project inspired by the classical Three-Body Problem i
 -Clicking Create adds a body to the simulation window
 
 
-##How It Works
+## How It Works
 
 -Launch the application.
 -Click anywhere on the grid.
@@ -24,7 +24,7 @@ A JavaFX-based simulation project inspired by the classical Three-Body Problem i
 -The body is rendered on the grid.
 
 
-##Planned Improvements
+## Planned Improvements
 
 -Simulation controls (Start/Pause/Reset)
 -Gravitational force calculation
@@ -33,7 +33,7 @@ A JavaFX-based simulation project inspired by the classical Three-Body Problem i
 -Expansion to N body problem 
 
 
-##Tech Stack
+## Tech Stack
 
 -Java
 -JavaFX
