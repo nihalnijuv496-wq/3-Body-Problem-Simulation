@@ -27,7 +27,7 @@ public class StartAnimation extends Application {
             if (numOfBodies[0] == Constants.N)
                 return;
             bodies[numOfBodies[0]] = new Body(event.getX(), event.getY());
-
+            bodies[numOfBodies[0]].setFill(Constants.bodyColors[numOfBodies[0]]);
             world.getChildren().add(bodies[numOfBodies[0]]);
             numOfBodies[0]++;
         });
