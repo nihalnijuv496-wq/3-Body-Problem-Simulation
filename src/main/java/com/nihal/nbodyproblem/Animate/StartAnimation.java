@@ -1,5 +1,6 @@
 package com.nihal.nbodyproblem.Animate;
 
+import com.nihal.nbodyproblem.Util.ButtonKey;
 import com.nihal.nbodyproblem.Util.Constants;
 import com.nihal.nbodyproblem.Util.Grid;
 import com.nihal.nbodyproblem.Body.Body;
@@ -32,6 +33,20 @@ public class StartAnimation extends Application {
             numOfBodies[0]++;
         });
 
+
+        ButtonKey startButton =
+                new ButtonKey("Start",
+                        Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
+                        (Constants.worldHeight - 3*Constants.buttonHeight - 2*Constants.buttonSpacing)/2);
+        ButtonKey endButton =
+                new ButtonKey("End",
+                        Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
+                        (Constants.worldHeight - Constants.buttonHeight)/2);
+        ButtonKey restartButton =
+                new ButtonKey("Reset",
+                        Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
+                        (Constants.worldHeight + Constants.buttonHeight + 2*Constants.buttonSpacing)/2);
+        world.getChildren().addAll(startButton, endButton, restartButton);
 
 
         stage.setTitle("Circle Simulation");
