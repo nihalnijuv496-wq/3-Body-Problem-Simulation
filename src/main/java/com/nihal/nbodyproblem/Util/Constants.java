@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 
 public class Constants {
     public static final int N = 3;
+    public static final int fps = 100;
 
     public static final int worldWidth = 1200;
     public static final int worldHeight = 700;
@@ -15,10 +16,11 @@ public class Constants {
     public static final int cellWidth = 15;
     public static final int buttonSpacing = 50;
 
-
     public static final Color[] bodyColors =
             {Color.rgb(255, 0, 0),
             Color.rgb(0, 255, 0),
             Color.rgb(0,0, 255)};
+
+    public static final double G =6.6743E-11;
 
 }
