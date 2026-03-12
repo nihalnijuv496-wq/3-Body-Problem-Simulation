@@ -21,9 +21,6 @@ public class PhysicsEngine {
                 body.setAcceleration(body.getAcceleration().add(acc));
             }
 
-            int nextPosX;
-            int nextPosY;
-
             //x dir
             body.setCenterX(body.getCenterX() +
                     body.getVelocity().getX()*((double) Constants.fps /10) +

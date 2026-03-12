@@ -1,5 +1,6 @@
 package com.nihal.nbodyproblem.Animate;
 
+import com.nihal.nbodyproblem.Timeloop.Timeloop;
 import com.nihal.nbodyproblem.Util.ButtonKey;
 import com.nihal.nbodyproblem.Util.Constants;
 import com.nihal.nbodyproblem.Util.Grid;
@@ -12,9 +13,15 @@ import javafx.stage.Stage;
 
 
 
+
 public class StartAnimation extends Application {
     @Override
     public void start(Stage stage) {
+        setUpScene(stage);
+    }
+
+    private void setUpScene(Stage stage)
+    {
         Pane world = new Pane();
         world.setStyle("-fx-background-color: black;");
 
@@ -33,20 +40,40 @@ public class StartAnimation extends Application {
             numOfBodies[0]++;
         });
 
-
+        Timeloop timeloop = new Timeloop(bodies);
         ButtonKey startButton =
                 new ButtonKey("Start",
                         Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
                         (Constants.worldHeight - 3*Constants.buttonHeight - 2*Constants.buttonSpacing)/2);
-        ButtonKey endButton =
-                new ButtonKey("End",
+        ButtonKey restartButton =
+                new ButtonKey("Restart",
                         Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
                         (Constants.worldHeight - Constants.buttonHeight)/2);
-        ButtonKey restartButton =
+        ButtonKey resetButton =
                 new ButtonKey("Reset",
                         Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
                         (Constants.worldHeight + Constants.buttonHeight + 2*Constants.buttonSpacing)/2);
-        world.getChildren().addAll(startButton, endButton, restartButton);
+        world.getChildren().addAll(startButton, restartButton, resetButton);
+
+
+        startButton.setOnAction(e -> {
+            if (numOfBodies[0] < Constants.N)
+                return;
+            startButton.setText(timeloop.pauseOrPlay());
+        });
+        restartButton.setOnAction(e -> {
+            if (numOfBodies[0] < Constants.N)
+                return;
+            for(Body body: bodies)
+                body.resetFieldsToInitial();
+            timeloop.pause();
+        });
+        resetButton.setOnAction(e -> {
+            if (numOfBodies[0] < Constants.N)
+                return;
+            timeloop.pause();
+            setUpScene(stage);
+        });
 
 
         stage.setTitle("Circle Simulation");

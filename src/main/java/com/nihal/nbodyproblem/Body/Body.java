@@ -11,6 +11,12 @@ public class Body extends Circle {
     private Vector acceleration;
     private double mass;
 
+    private double initialRadius;
+    private Vector initialCenter;
+    private Vector initialVelocity;
+    private Vector initialAcceleration;
+    private double initialMass;
+
     public Body(double x,double y)
     {
 
@@ -23,6 +29,13 @@ public class Body extends Circle {
         center = new Vector(dataGetter.getCenter().getX(), dataGetter.getCenter().getY());
         setCenterX(center.getX());
         setCenterY(center.getY());
+
+        initialRadius = radius;
+        initialCenter = center;
+        initialVelocity = velocity;
+        initialAcceleration = acceleration;
+        initialMass = mass;
+
 
         setRadius(radius);
     }
@@ -40,5 +53,21 @@ public class Body extends Circle {
     public Vector getCenter() { return this.center; }
     public double getMass() { return this.mass; }
     public Vector getVelocity() { return this.velocity; }
+
+
+    public void resetFieldsToInitial()
+    {
+        radius = initialRadius;
+        mass = initialMass;
+        velocity = initialVelocity;
+        acceleration = initialAcceleration;
+        center = initialCenter;
+
+        setCenterX(center.getX());
+        setCenterY(center.getY());
+        setRadius(radius);
+
+
+    }
 
 }
