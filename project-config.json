@@ -1,0 +1,66 @@
+{
+  "name": "3 Body Problem Simulation",
+  "version": "1.0.0",
+  "description": "A physics simulation that visualizes the chaotic motion of three gravitational bodies interacting under Newtonian gravity. The simulation demonstrates orbital instability, emergent patterns, and chaotic trajectories.",
+
+  "author": "Nihal",
+  "license": "MIT",
+  "language": "Java",
+
+  "status": "completed",
+
+  "tags": [
+    "Physics Simulation",
+    "N-Body Problem",
+    "Java",
+    "Newtonian Gravity",
+    "Scientific Visualization"
+  ],
+
+  "links": {
+    "GitHub": "https://github.com/nihalnijuv496-wq/3-Body-Problem-Simulation",
+    "Live Demo": "https://nihalnijuv496-wq.github.io/3-Body-Problem-Simulation",
+    "Documentation": "https://github.com/nihalnijuv496-wq/3-Body-Problem-Simulation#readme",
+    "Demo Video": "https://youtube.com"
+  },
+
+  "team": [
+    {
+      "name": "Nihal",
+      "role": "Developer",
+      "github": "https://github.com/nihalnijuv496-wq"
+    }
+  ],
+
+  "highlights": [
+    "Real-time gravitational simulation of three interacting bodies",
+    "Interactive controls to start, pause, and reset the simulation",
+    "Visual trajectory tracking for each body",
+    "Demonstrates chaotic behavior in classical mechanics"
+  ],
+
+  "screenshots": [
+    "https://placehold.co/600x400/000000/FFFFFF?text=3+Body+Simulation",
+    "https://placehold.co/600x400/1a1a2e/00ffff?text=3+Body+Physics"
+  ],
+
+  "techStack": {
+    "language": "Java",
+    "buildTool": "Maven",
+    "graphics": "JavaFX",
+    "physics": "Newtonian Gravity Simulation"
+  },
+
+  "features": [
+    "Start, pause, and reset simulation controls",
+    "Grid-based visualization environment",
+    "Real-time physics calculations",
+    "Trajectory rendering for each body"
+  ],
+
+  "timeline": {
+    "started": "2026-0x",
+    "launched": "2026-0x",
+    "lastUpdated": "2026-0x"
+  }
+}
