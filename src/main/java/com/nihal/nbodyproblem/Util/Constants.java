@@ -22,6 +22,6 @@ public class Constants {
             Color.rgb(0, 255, 0),
             Color.rgb(0,0, 255)};
 
-    public static final double G =6.6743E-11;
+    public static final double G = 100;
 
 }

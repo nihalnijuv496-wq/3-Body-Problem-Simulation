@@ -27,15 +27,17 @@ public class PhysicsEngine {
         for (Body body: bodies)
         {
             //x dir
-            body.setCenterX(body.getCenterX() +
+            double newX = body.getCenterX() +
                     body.getVelocity().getX()*(Constants.timeStep) +
-                    0.5*body.getAcceleration().getX()*(Constants.timeStep)*(Constants.timeStep));
+                    0.5*body.getAcceleration().getX()*(Constants.timeStep)*(Constants.timeStep);
             body.getVelocity().setX(body.getVelocity().getX() + body.getAcceleration().getX() * (Constants.timeStep));
             //y dir
-            body.setCenterY(body.getCenterY() +
+            double newY = body.getCenterY() +
                     body.getVelocity().getY()*(Constants.timeStep) +
-                    0.5*body.getAcceleration().getY()*(Constants.timeStep)*(Constants.timeStep));
+                    0.5*body.getAcceleration().getY()*(Constants.timeStep)*(Constants.timeStep);
             body.getVelocity().setY(body.getVelocity().getY() + body.getAcceleration().getY() * (Constants.timeStep));
+
+            body.setCenter(newX, newY);
         }
     }
 }

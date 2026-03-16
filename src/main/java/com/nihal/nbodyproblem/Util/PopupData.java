@@ -36,20 +36,20 @@ public class PopupData extends Stage {
 
 
         Label radiusLabel = new Label("Radius:");
-        TextField radiusField = new TextField("1");
+        TextField radiusField = new TextField("50");
         radiusField.setPromptText("Enter radius");
         inputGrid.add(radiusLabel, 0, 1);
         inputGrid.add(radiusField, 1, 1);
 
 
         Label velocityXLabel = new Label("Velocity X:");
-        TextField velocityXField = new TextField("1");
+        TextField velocityXField = new TextField("0");
         velocityXField.setPromptText("Enter Velocity(x)");
         inputGrid.add(velocityXLabel, 0, 2);
         inputGrid.add(velocityXField, 1, 2);
 
         Label velocityYLabel = new Label("Velocity Y:");
-        TextField velocityYField = new TextField("1");
+        TextField velocityYField = new TextField("0");
         velocityYField.setPromptText("Enter Velocity(y)");
         inputGrid.add(velocityYLabel, 0, 3);
         inputGrid.add(velocityYField, 1, 3);

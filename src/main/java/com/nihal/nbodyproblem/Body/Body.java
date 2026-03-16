@@ -54,6 +54,13 @@ public class Body extends Circle {
     public double getMass() { return this.mass; }
     public Vector getVelocity() { return this.velocity; }
 
+    public void setCenter(double x, double y) {
+        center.setX(x);
+        center.setY(y);
+
+        setCenterX(x);
+        setCenterY(y);
+    }
 
     public void resetFieldsToInitial()
     {
@@ -66,8 +73,6 @@ public class Body extends Circle {
         setCenterX(center.getX());
         setCenterY(center.getY());
         setRadius(radius);
-
-
     }
 
 }
