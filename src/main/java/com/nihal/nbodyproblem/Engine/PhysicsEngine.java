@@ -3,12 +3,15 @@ import com.nihal.nbodyproblem.Body.Body;
 import com.nihal.nbodyproblem.Util.Constants;
 import com.nihal.nbodyproblem.Util.Vector;
 
+import java.util.List;
+
 public class PhysicsEngine {
 
-    public void update(Body[] bodies)
+    public void update(List<Body> bodies)
     {
         for (Body body: bodies)
         {
+            body.setAcceleration(new Vector(0,0));
             for (Body bodyIter: bodies)
             {
                 if(body.equals(bodyIter)) continue;
@@ -20,17 +23,19 @@ public class PhysicsEngine {
                 Vector acc = displacement.scale(scalingFactorAcc);
                 body.setAcceleration(body.getAcceleration().add(acc));
             }
-
+        }
+        for (Body body: bodies)
+        {
             //x dir
             body.setCenterX(body.getCenterX() +
-                    body.getVelocity().getX()*((double) Constants.fps /10) +
-                    0.5*body.getAcceleration().getX()*((double) Constants.fps /10)*((double) Constants.fps /10));
-            body.getVelocity().setX(body.getVelocity().getX() + body.getAcceleration().getX() * ((double) Constants.fps /100));
+                    body.getVelocity().getX()*(Constants.timeStep) +
+                    0.5*body.getAcceleration().getX()*(Constants.timeStep)*(Constants.timeStep));
+            body.getVelocity().setX(body.getVelocity().getX() + body.getAcceleration().getX() * (Constants.timeStep));
             //y dir
             body.setCenterY(body.getCenterY() +
-                    body.getVelocity().getY()*((double) Constants.fps /10) +
-                    0.5*body.getAcceleration().getY()*((double) Constants.fps /10)*((double) Constants.fps /10));
-            body.getVelocity().setY(body.getVelocity().getY() + body.getAcceleration().getY() * ((double) Constants.fps /100));
+                    body.getVelocity().getY()*(Constants.timeStep) +
+                    0.5*body.getAcceleration().getY()*(Constants.timeStep)*(Constants.timeStep));
+            body.getVelocity().setY(body.getVelocity().getY() + body.getAcceleration().getY() * (Constants.timeStep));
         }
     }
 }

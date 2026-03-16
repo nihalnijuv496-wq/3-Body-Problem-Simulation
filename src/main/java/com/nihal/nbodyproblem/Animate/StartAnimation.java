@@ -11,7 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class StartAnimation extends Application {
@@ -28,19 +29,23 @@ public class StartAnimation extends Application {
         Grid grid = new Grid();
         world.getChildren().add(grid);
 
-        Body[] bodies = new Body[Constants.N];
+        List<Body> bodies = new ArrayList<>();
         int[] numOfBodies = {0};
 
         world.setOnMouseClicked(event ->{
             if (numOfBodies[0] == Constants.N)
                 return;
-            bodies[numOfBodies[0]] = new Body(event.getX(), event.getY());
-            bodies[numOfBodies[0]].setFill(Constants.bodyColors[numOfBodies[0]]);
-            world.getChildren().add(bodies[numOfBodies[0]]);
+            /*bodies.set(numOfBodies[0], new Body(event.getX(), event.getY()));
+            bodies.get(numOfBodies[0]).setFill(Constants.bodyColors[numOfBodies[0]]);
+            world.getChildren().add(bodies.get(numOfBodies[0]));
+            numOfBodies[0]++;*/
+            bodies.add(new Body(event.getX(), event.getY()));
+            bodies.getLast().setFill(Constants.bodyColors[numOfBodies[0]]);
+            world.getChildren().add(bodies.getLast());
             numOfBodies[0]++;
         });
 
-        Timeloop timeloop = new Timeloop(bodies);
+
         ButtonKey startButton =
                 new ButtonKey("Start",
                         Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
@@ -55,7 +60,7 @@ public class StartAnimation extends Application {
                         (Constants.worldHeight + Constants.buttonHeight + 2*Constants.buttonSpacing)/2);
         world.getChildren().addAll(startButton, restartButton, resetButton);
 
-
+        Timeloop timeloop = new Timeloop(bodies);
         startButton.setOnAction(e -> {
             if (numOfBodies[0] < Constants.N)
                 return;
@@ -69,8 +74,6 @@ public class StartAnimation extends Application {
             timeloop.pause();
         });
         resetButton.setOnAction(e -> {
-            if (numOfBodies[0] < Constants.N)
-                return;
             timeloop.pause();
             setUpScene(stage);
         });

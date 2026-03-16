@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 public class Constants {
     public static final int N = 3;
     public static final int fps = 100;
+    public static final int timeStep = 1;
 
     public static final int worldWidth = 1200;
     public static final int worldHeight = 700;
