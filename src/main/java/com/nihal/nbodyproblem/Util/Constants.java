@@ -4,9 +4,9 @@ package com.nihal.nbodyproblem.Util;
 import javafx.scene.paint.Color;
 
 public class Constants {
-    public static final int N = 3;
+    public static final int N = 2;
     public static final int fps = 100;
-    public static final int timeStep = 1;
+    public static final double timeStep = 1;
 
     public static final int worldWidth = 1200;
     public static final int worldHeight = 700;
@@ -23,5 +23,6 @@ public class Constants {
             Color.rgb(0,0, 255)};
 
     public static final double G = 100;
+    public static final int epsilon = 0;
 
 }

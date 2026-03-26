@@ -31,10 +31,10 @@ public class Body extends Circle {
         setCenterY(center.getY());
 
         initialRadius = radius;
-        initialCenter = center;
-        initialVelocity = velocity;
-        initialAcceleration = acceleration;
         initialMass = mass;
+        initialCenter = new Vector(center.getX(), center.getY());
+        initialVelocity = new Vector(velocity.getX(), velocity.getY());
+        initialAcceleration = new Vector(acceleration.getX(), acceleration.getY());
 
 
         setRadius(radius);
@@ -66,9 +66,9 @@ public class Body extends Circle {
     {
         radius = initialRadius;
         mass = initialMass;
-        velocity = initialVelocity;
-        acceleration = initialAcceleration;
-        center = initialCenter;
+        velocity = new Vector(initialVelocity.getX(), initialVelocity.getY());
+        acceleration = new Vector(initialAcceleration.getX(), initialAcceleration.getY());
+        center = new Vector(initialCenter.getX(), initialCenter.getY());
 
         setCenterX(center.getX());
         setCenterY(center.getY());

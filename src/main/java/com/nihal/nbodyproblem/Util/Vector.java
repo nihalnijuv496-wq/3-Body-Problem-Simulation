@@ -32,7 +32,7 @@ public class Vector {
         return new Vector(this.x - B.x, this.y - B.y);
     }
     public Vector scale(double c) { return new Vector(c*this.getX(), c*this.getY()); }
-    public double magn() { return Math.sqrt(Math.pow(this.getX(), 2) + Math.pow(this.getX(), 2)); }
+    public double magn() { return Math.sqrt(Math.pow(this.getX(), 2) + Math.pow(this.getY(), 2)); }
     double dot(Vector B)
     {
         return (this.x * B.x + this.y * B.y);

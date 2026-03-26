@@ -36,7 +36,7 @@ public class PopupData extends Stage {
 
 
         Label radiusLabel = new Label("Radius:");
-        TextField radiusField = new TextField("50");
+        TextField radiusField = new TextField("10");
         radiusField.setPromptText("Enter radius");
         inputGrid.add(radiusLabel, 0, 1);
         inputGrid.add(radiusField, 1, 1);

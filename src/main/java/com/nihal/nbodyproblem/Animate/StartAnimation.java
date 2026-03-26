@@ -35,10 +35,7 @@ public class StartAnimation extends Application {
         world.setOnMouseClicked(event ->{
             if (numOfBodies[0] == Constants.N)
                 return;
-            /*bodies.set(numOfBodies[0], new Body(event.getX(), event.getY()));
-            bodies.get(numOfBodies[0]).setFill(Constants.bodyColors[numOfBodies[0]]);
-            world.getChildren().add(bodies.get(numOfBodies[0]));
-            numOfBodies[0]++;*/
+
             bodies.add(new Body(event.getX(), event.getY()));
             bodies.getLast().setFill(Constants.bodyColors[numOfBodies[0]]);
             world.getChildren().add(bodies.getLast());
