@@ -1,9 +1,10 @@
 package com.nihal.nbodyproblem.Animate;
 
 import com.nihal.nbodyproblem.Timeloop.Timeloop;
-import com.nihal.nbodyproblem.Util.ButtonKey;
+import com.nihal.nbodyproblem.UI.ButtonKey;
+import com.nihal.nbodyproblem.UI.CONTROLBUTTON;
 import com.nihal.nbodyproblem.Util.Constants;
-import com.nihal.nbodyproblem.Util.Grid;
+import com.nihal.nbodyproblem.UI.Grid;
 import com.nihal.nbodyproblem.Body.Body;
 
 import javafx.application.Application;
@@ -43,37 +44,17 @@ public class StartAnimation extends Application {
         });
 
 
-        ButtonKey startButton =
-                new ButtonKey("Start",
-                        Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
-                        (Constants.worldHeight - 3*Constants.buttonHeight - 2*Constants.buttonSpacing)/2);
-        ButtonKey restartButton =
-                new ButtonKey("Restart",
-                        Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
-                        (Constants.worldHeight - Constants.buttonHeight)/2);
-        ButtonKey resetButton =
-                new ButtonKey("Reset",
-                        Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
-                        (Constants.worldHeight + Constants.buttonHeight + 2*Constants.buttonSpacing)/2);
-        world.getChildren().addAll(startButton, restartButton, resetButton);
-
         Timeloop timeloop = new Timeloop(bodies);
-        startButton.setOnAction(e -> {
-            if (numOfBodies[0] < Constants.N)
-                return;
-            startButton.setText(timeloop.pauseOrPlay());
-        });
-        restartButton.setOnAction(e -> {
-            if (numOfBodies[0] < Constants.N)
-                return;
-            for(Body body: bodies)
-                body.resetFieldsToInitial();
-            timeloop.pause();
-        });
-        resetButton.setOnAction(e -> {
-            timeloop.pause();
-            setUpScene(stage);
-        });
+
+        ButtonKey[] controlButtons = {
+                ButtonKey.addControlButton("Start", CONTROLBUTTON.START, timeloop, numOfBodies, bodies, world),
+                ButtonKey.addControlButton("Restart", CONTROLBUTTON.RESTART, timeloop, numOfBodies, bodies, world),
+                ButtonKey.addControlButton("Reset", CONTROLBUTTON.RESET, timeloop, numOfBodies, bodies, world)};
+
+        for (ButtonKey buttonKey: controlButtons)
+            world.getChildren().add(buttonKey);
+
+
 
 
         stage.setTitle("Circle Simulation");

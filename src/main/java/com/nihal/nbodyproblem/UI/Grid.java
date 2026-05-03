@@ -1,5 +1,6 @@
-package com.nihal.nbodyproblem.Util;
+package com.nihal.nbodyproblem.UI;
 
+import com.nihal.nbodyproblem.Util.Constants;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;

@@ -20,7 +20,7 @@ public class Timeloop{
     {
         this.bodies = bodies;
         this.timeloop = new Timeline(
-                new KeyFrame(Duration.millis(1000/Constants.fps), e ->{
+                new KeyFrame(Duration.millis((double) 1000 /Constants.fps), e ->{
                     physicsEngine.update(bodies);
                 })
         );

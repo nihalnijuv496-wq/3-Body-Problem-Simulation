@@ -1,11 +1,10 @@
-package com.nihal.nbodyproblem.Util;
+package com.nihal.nbodyproblem.UI;
 
+import com.nihal.nbodyproblem.Util.Vector;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;

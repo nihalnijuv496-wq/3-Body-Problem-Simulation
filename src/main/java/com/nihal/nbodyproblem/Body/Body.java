@@ -1,6 +1,6 @@
 package com.nihal.nbodyproblem.Body;
 
-import com.nihal.nbodyproblem.Util.PopupData;
+import com.nihal.nbodyproblem.UI.PopupData;
 import com.nihal.nbodyproblem.Util.Vector;
 import javafx.scene.shape.Circle;
 
