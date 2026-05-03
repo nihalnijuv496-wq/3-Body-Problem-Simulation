@@ -31,16 +31,11 @@ public class Timeloop{
     public void start() {timeloop.play();}
     public void pause() {timeloop.stop();}
 
-    public String pauseOrPlay()
+    public void pauseOrPlay()
     {
-        if (timeloop.getStatus() == Animation.Status.RUNNING) {
+        if (timeloop.getStatus() == Animation.Status.RUNNING)
             timeloop.stop();
-            return "Start";
-        }
         else
-        {
             timeloop.play();
-            return "Stop";
-        }
     }
 };

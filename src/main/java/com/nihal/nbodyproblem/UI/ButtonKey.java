@@ -16,7 +16,7 @@ public class ButtonKey extends Button {
         setPrefSize(Constants.buttonWidth, Constants.buttonHeight);
         setStyle("-fx-background-color: #ffff00;" +
                 "-fx-text-fill: black;" +
-                "-fx-font-size: 24px");
+                "-fx-font-size: 15px");
         setLayoutX(x);
         setLayoutY(y);
     }
@@ -28,13 +28,13 @@ public class ButtonKey extends Button {
         if (type == CONTROLBUTTON.START)
         {
             ButtonKey startButton =
-                    new ButtonKey("Start",
+                    new ButtonKey("Start/Pause",
                             Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
                             (Constants.worldHeight - 3*Constants.buttonHeight - 2*Constants.buttonSpacing)/2);
             startButton.setOnAction(e -> {
                 if (numberOfBodies[0] < Constants.N)
                     return;
-                startButton.setText(timeloop.pauseOrPlay());
+                timeloop.pauseOrPlay();
             });
 
             return startButton;
@@ -66,8 +66,6 @@ public class ButtonKey extends Button {
                 bodies.clear();
                 timeloop.pause();
                 world.getChildren().removeIf(node -> node instanceof Body);
-
-                addControlButton("Start", CONTROLBUTTON.START, timeloop, numberOfBodies, bodies, world);
 
             });
 
