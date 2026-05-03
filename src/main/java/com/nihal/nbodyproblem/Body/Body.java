@@ -1,6 +1,7 @@
 package com.nihal.nbodyproblem.Body;
 
 import com.nihal.nbodyproblem.UI.PopupData;
+import com.nihal.nbodyproblem.UI.SideBar.DataInputBox;
 import com.nihal.nbodyproblem.Util.Vector;
 import javafx.scene.shape.Circle;
 
@@ -17,10 +18,10 @@ public class Body extends Circle {
     private Vector initialAcceleration;
     private double initialMass;
 
-    public Body(double x,double y)
+    public Body(double x,double y, DataInputBox dib)
     {
 
-        PopupData dataGetter = new PopupData("Enter mass, Vx, Vy, specify center, radius", x, y);
+        /*PopupData dataGetter = new PopupData("Enter mass, Vx, Vy, specify center, radius", x, y);
 
         radius = dataGetter.getRadius();
         mass = dataGetter.getMass();
@@ -29,6 +30,17 @@ public class Body extends Circle {
         center = new Vector(dataGetter.getCenter().getX(), dataGetter.getCenter().getY());
         setCenterX(center.getX());
         setCenterY(center.getY());
+*/
+
+
+        radius = dib.getRadius();
+        mass = dib.getMass();
+        velocity = dib.getVelocity();
+        acceleration = new Vector(0, 0);
+        center = new Vector(x, y);
+        setCenterX(center.getX());
+        setCenterY(center.getY());
+        setRadius(radius);
 
         initialRadius = radius;
         initialMass = mass;
@@ -37,7 +49,7 @@ public class Body extends Circle {
         initialAcceleration = new Vector(acceleration.getX(), acceleration.getY());
 
 
-        setRadius(radius);
+
     }
 
     public void setAcceleration(Vector acceleration)

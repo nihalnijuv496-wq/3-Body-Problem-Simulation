@@ -8,8 +8,9 @@ public class Constants {
     public static final int fps = 100;
     public static final double timeStep = 1;
 
-    public static final int worldWidth = 1425;
+    public static final int worldWidth = 1200;
     public static final int worldHeight = 700;
+    public static final int sideBarWidth = 225;
 
     public static final int buttonWidth = 100;
     public static final int buttonHeight = 50;
@@ -24,5 +25,17 @@ public class Constants {
 
     public static final double G = 100;
     public static final int epsilon = 0;
+
+    public static final int maxVx = 500;
+    public static final int maxVy = 500;
+    public static final int minVx = -500;
+    public static final int minVy = -500;
+    public static final double maxV = Math.sqrt(2)*maxVx;
+    public static final double minV = -1*maxV;
+    public static final int minMass = 1;
+    public static final int maxMass = 500;
+    public static final int maxRadius = 100;
+    public static  final int minRadius = 1;
+
 
 }

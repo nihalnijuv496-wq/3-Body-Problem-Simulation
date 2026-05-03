@@ -2,6 +2,7 @@ package com.nihal.nbodyproblem.UI;
 
 import com.nihal.nbodyproblem.Body.Body;
 import com.nihal.nbodyproblem.Timeloop.Timeloop;
+import com.nihal.nbodyproblem.UI.SideBar.SideBar;
 import com.nihal.nbodyproblem.Util.Constants;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -22,7 +23,7 @@ public class ButtonKey extends Button {
     }
 
     public static ButtonKey addControlButton
-            (String title, CONTROLBUTTON type, Timeloop timeloop, int[] numberOfBodies, List<Body> bodies, Pane world)
+            (String title, CONTROLBUTTON type, Timeloop timeloop, int[] numberOfBodies, List<Body> bodies, Pane world, SideBar sb)
     {
 
         if (type == CONTROLBUTTON.START)
@@ -66,6 +67,7 @@ public class ButtonKey extends Button {
                 bodies.clear();
                 timeloop.pause();
                 world.getChildren().removeIf(node -> node instanceof Body);
+                sb.resetAll();
 
             });
 
