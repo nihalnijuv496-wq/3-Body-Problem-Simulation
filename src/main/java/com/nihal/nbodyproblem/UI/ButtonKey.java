@@ -22,6 +22,7 @@ public class ButtonKey extends Button {
         setLayoutY(y);
     }
 
+    static boolean isFirstClick = true;
     public static ButtonKey addControlButton
             (String title, CONTROLBUTTON type, Timeloop timeloop, int[] numberOfBodies, List<Body> bodies, Pane world, SideBar sb)
     {
@@ -36,6 +37,13 @@ public class ButtonKey extends Button {
                 if (numberOfBodies[0] < Constants.N)
                     return;
                 timeloop.pauseOrPlay();
+
+                if (isFirstClick)
+                {
+                    for (Body b: bodies) b.captureInitialFields();
+                    isFirstClick = false;
+                }
+
             });
 
             return startButton;
@@ -68,6 +76,8 @@ public class ButtonKey extends Button {
                 timeloop.pause();
                 world.getChildren().removeIf(node -> node instanceof Body);
                 sb.resetAll();
+                isFirstClick = true;
+
 
             });
 
