@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 public class Constants {
     public static final int N = 3;
     public static final int fps = 100;
-    public static final double timeStep = 1;
+    public static final double timeStep = 0.5;
 
     public static final int worldWidth = 1200;
     public static final int worldHeight = 700;
@@ -26,13 +26,13 @@ public class Constants {
     public static final double G = 100;
     public static final int epsilon = 5;
 
-    public static final int maxVx = 500;
-    public static final int maxVy = 500;
-    public static final int minVx = -500;
-    public static final int minVy = -500;
+    public static final int maxVx = 50;
+    public static final int maxVy = 50;
+    public static final int minVx = -50;
+    public static final int minVy = -50;
     public static final double maxV = Math.sqrt(2)*maxVx;
     public static final double minV = -1*maxV;
-    public static final int minMass = 1;
+    public static final int minMass = 50;
     public static final int maxMass = 500;
     public static final int maxRadius = 100;
     public static  final int minRadius = 1;

@@ -19,10 +19,10 @@ public class DataInputBox extends VBox {
     Slider angleSlider = new Slider(0, 360, 0);
     Slider vxSlider = new Slider(Constants.minVx, Constants.maxVx, 0);
     Slider vySlider = new Slider(Constants.minVy, Constants.maxVy, 0);
-    Slider massSlider = new Slider(Constants.minMass, Constants.maxMass, 1);
+    Slider massSlider = new Slider(Constants.minMass, Constants.maxMass, 150);
     Slider centerXSlider = new Slider(0, Constants.worldWidth, 100);
     Slider centerYSlider = new Slider(0, Constants.worldHeight, 100);
-    Slider radiusSlider = new Slider(Constants.minRadius, Constants.maxRadius, 10);
+    Slider radiusSlider = new Slider(Constants.minRadius, Constants.maxRadius, 15);
 
 
     boolean[] updating = {false};
