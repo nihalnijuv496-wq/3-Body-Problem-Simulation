@@ -1,5 +1,6 @@
 package com.nihal.nbodyproblem.UI.SideBar;
 
+import com.nihal.nbodyproblem.Body.Body;
 import com.nihal.nbodyproblem.Util.Constants;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
@@ -34,9 +35,9 @@ public class SideBar extends ScrollPane {
         setContent(sideBarContent);
     }
 
-    public void addNewTab(int i)
+    public void addNewTab(int i, List<Body> bodies)
     {
-        dataInputBoxes.add(new DataInputBox());
+        dataInputBoxes.add(new DataInputBox(bodies));
         toggleButtons.add(new ToggleButton("m" + (i + 1)));
         toggleButtons.getLast().setToggleGroup(grp);
         tabs.getChildren().add(toggleButtons.getLast());
@@ -54,6 +55,7 @@ public class SideBar extends ScrollPane {
 
     public void resetAll()
     {
+        DataInputBox.totalNum = 0;
         dataInputBoxes.clear();
         toggleButtons.clear();
         tabs.getChildren().clear();

@@ -42,7 +42,7 @@ public class PhysicsEngine {
                     0.5*body.getAcceleration().getY()*(Constants.timeStep)*(Constants.timeStep);
             body.getVelocity().setY(body.getVelocity().getY() + 0.5*(body.getAcceleration().getY() + oldAccs[i].getY()) * (Constants.timeStep));
 
-            body.setCenter(newX, newY);
+            body.setCenter(new Vector(newX, newY));
             ++i;
         }
         i = 0;

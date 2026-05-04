@@ -21,17 +21,6 @@ public class Body extends Circle {
     public Body(double x,double y, DataInputBox dib)
     {
 
-        /*PopupData dataGetter = new PopupData("Enter mass, Vx, Vy, specify center, radius", x, y);
-
-        radius = dataGetter.getRadius();
-        mass = dataGetter.getMass();
-        velocity = dataGetter.getVelocity();
-        acceleration = new Vector(0, 0);
-        center = new Vector(dataGetter.getCenter().getX(), dataGetter.getCenter().getY());
-        setCenterX(center.getX());
-        setCenterY(center.getY());
-*/
-
 
         radius = dib.getRadius();
         mass = dib.getMass();
@@ -52,11 +41,7 @@ public class Body extends Circle {
 
     }
 
-    public void setAcceleration(Vector acceleration)
-    {
-        this.acceleration = acceleration;
-    }
-    public void setVelocity(Vector velocity) { this.velocity = velocity; }
+
 
     public Vector getAcceleration()
     {
@@ -66,12 +51,24 @@ public class Body extends Circle {
     public double getMass() { return this.mass; }
     public Vector getVelocity() { return this.velocity; }
 
-    public void setCenter(double x, double y) {
-        center.setX(x);
-        center.setY(y);
+    public void setAcceleration(Vector acceleration)
+    {
+        this.acceleration = acceleration;
+    }
+    public void setVelocity(Vector velocity) { this.velocity = velocity; }
+    public void setCenter(Vector c)
+    {
+        center.setX(c.getX());
+        center.setY(c.getY());
 
-        setCenterX(x);
-        setCenterY(y);
+        setCenterX(c.getX());
+        setCenterY(c.getY());
+    }
+    public void setMass(double mass) { this.mass = mass; }
+    public void setRad(double r)
+    {
+        super.setRadius(r);
+        this.radius = r;
     }
 
     public void resetFieldsToInitial()

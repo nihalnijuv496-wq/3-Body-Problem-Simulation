@@ -1,5 +1,6 @@
 package com.nihal.nbodyproblem.UI.SideBar;
 
+import com.nihal.nbodyproblem.Body.Body;
 import com.nihal.nbodyproblem.Util.Constants;
 import com.nihal.nbodyproblem.Util.Vector;
 import javafx.beans.value.ChangeListener;
@@ -7,8 +8,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 
+import java.util.List;
+
 public class DataInputBox extends VBox {
 
+    static int totalNum = 0;
+
+    int num;
     Slider speedSlider = new Slider(Constants.minV, Constants.maxV, 0);
     Slider angleSlider = new Slider(0, 360, 0);
     Slider vxSlider = new Slider(Constants.minVx, Constants.maxVx, 0);
@@ -20,30 +26,9 @@ public class DataInputBox extends VBox {
 
 
     boolean[] updating = {false};
-
-    ChangeListener<Number> vaListener = (obs, old, newVal) -> {
-        if (updating[0]) return;
-        updating[0] = true;
-        double speed = speedSlider.getValue();
-        double angle = Math.toRadians(angleSlider.getValue());
-        vxSlider.setValue(speed * Math.cos(angle));
-        vySlider.setValue(speed * Math.sin(angle));
-        updating[0] = false;
-    };
-
-    ChangeListener<Number> vcListener = (obs, old, newVal) -> {
-        if (updating[0]) return;
-        updating[0] = true;
-        double vx = vxSlider.getValue();
-        double vy = vySlider.getValue();
-        speedSlider.setValue(Math.sqrt(vx*vx + vy*vy));
-        angleSlider.setValue(Math.toDegrees(Math.atan2(vy, vx)));
-        updating[0] = false;
-    };
-
-
-    public DataInputBox()
+    public DataInputBox(List<Body> bodies)
     {
+        num = totalNum++;
 
         String headerStyle = "-fx-font-size: 20px; -fx-font-weight: bold;";
         Label VATitle = new Label("Velocity-Angle");
@@ -58,12 +43,54 @@ public class DataInputBox extends VBox {
         Label massTitle = new Label("Mass");
         massTitle.setStyle(headerStyle);
 
+        Label radiusTitle = new Label("Radius");
+        radiusTitle.setStyle(headerStyle);
+
+
+        ChangeListener<Number> vaListener = (obs, old, newVal) -> {
+            if (updating[0]) return;
+            updating[0] = true;
+            double speed = speedSlider.getValue();
+            double angle = Math.toRadians(angleSlider.getValue());
+            vxSlider.setValue(speed * Math.cos(angle));
+            vySlider.setValue(speed * Math.sin(angle));
+            bodies.get(num).setVelocity(getVelocity());
+            updating[0] = false;
+
+            System.out.println("va listener "+bodies.get(num).getVelocity().getX() + " " +bodies.get(num).getVelocity().getX());
+
+
+        };
+
+        ChangeListener<Number> vcListener = (obs, old, newVal) -> {
+            if (updating[0]) return;
+            updating[0] = true;
+            double vx = vxSlider.getValue();
+            double vy = vySlider.getValue();
+            speedSlider.setValue(Math.sqrt(vx*vx + vy*vy));
+            angleSlider.setValue(Math.toDegrees(Math.atan2(vy, vx)));
+            bodies.get(num).setVelocity(getVelocity()); // ← add this
+            updating[0] = false;
+        };
+
 
         speedSlider.valueProperty().addListener(vaListener);
         angleSlider.valueProperty().addListener(vaListener);
         vxSlider.valueProperty().addListener(vcListener);
         vySlider.valueProperty().addListener(vcListener);
 
+        massSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            bodies.get(num).setMass(this.getMass());
+        });
+        centerXSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            bodies.get(num).setCenter(this.getCenter());
+        });
+        centerYSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            bodies.get(num).setCenter(this.getCenter());
+        });
+        radiusSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            bodies.get(num).setRad(this.getRadius());
+        });
 
 
         getChildren().addAll(
@@ -81,10 +108,15 @@ public class DataInputBox extends VBox {
                 massSlider,
                 centerTitle,
                 centerXSlider,
-                centerYSlider
+                centerYSlider,
+                radiusTitle,
+                radiusSlider
         );
 
     }
+
+
+
 
     public double getMass() { return massSlider.getValue(); }
     public double getSpeed() { return speedSlider.getValue(); }

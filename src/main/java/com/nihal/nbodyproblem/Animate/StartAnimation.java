@@ -48,7 +48,7 @@ public class StartAnimation extends Application {
         world.setOnMouseClicked(event ->{
             if (numOfBodies[0] == Constants.N)
                 return;
-            sideBar.addNewTab(numOfBodies[0]);
+            sideBar.addNewTab(numOfBodies[0], bodies);
             bodies.add(new Body(event.getX(), event.getY(), sideBar.getLastDataInputBox()));
             bodies.getLast().setFill(Constants.bodyColors[numOfBodies[0]]);
             world.getChildren().add(bodies.getLast());

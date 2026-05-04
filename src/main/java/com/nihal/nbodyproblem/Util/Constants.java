@@ -24,7 +24,7 @@ public class Constants {
             Color.rgb(0,0, 255)};
 
     public static final double G = 100;
-    public static final int epsilon = 0;
+    public static final int epsilon = 5;
 
     public static final int maxVx = 500;
     public static final int maxVy = 500;
