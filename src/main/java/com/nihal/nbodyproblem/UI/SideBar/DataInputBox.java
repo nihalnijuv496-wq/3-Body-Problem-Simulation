@@ -43,6 +43,15 @@ public class DataInputBox extends VBox {
         Label centerXSubHeader = new Label("CenterX");
         Label centerYSubHeader = new Label("centerY");
 
+        Label speedValue = new Label("Speed: " + String.valueOf(speedSlider.getValue()));
+        Label angleValue = new Label("Angle: " + String.valueOf(angleSlider.getValue()));
+        Label vxValue = new Label("SpeedX: " + String.valueOf(vxSlider.getValue()));
+        Label vyValue = new Label("SpeedY: " + String.valueOf(vySlider.getValue()));
+        Label centerXValue = new Label("CenterX: " + String.valueOf(centerXSlider.getValue()));
+        Label centerYValue = new Label("CenterY: " + String.valueOf(centerYSlider.getValue()));
+        Label radiusValue = new Label("Radius: " + String.valueOf(radiusSlider.getValue()));
+        Label massValue = new Label("Mass: " + String.valueOf(massSlider.getValue()));
+
         VAHeader.getStyleClass().add("header-label");
         VCHeader.getStyleClass().add("header-label");
         centerHeader.getStyleClass().add("header-label");
@@ -56,6 +65,15 @@ public class DataInputBox extends VBox {
         centerXSubHeader.getStyleClass().add("sub-header-label");
         centerYSubHeader.getStyleClass().add("sub-header-label");
 
+        speedValue.getStyleClass().add("sub-header-label");
+        angleValue.getStyleClass().add("sub-header-label");
+        vxValue.getStyleClass().add("sub-header-label");
+        vyValue.getStyleClass().add("sub-header-label");
+        centerXValue.getStyleClass().add("sub-header-label");
+        centerYValue.getStyleClass().add("sub-header-label");
+        radiusValue.getStyleClass().add("sub-header-label");
+        massValue.getStyleClass().add("sub-header-label");
+
         ChangeListener<Number> vaListener = (obs, old, newVal) -> {
             if (updating[0]) return;
             updating[0] = true;
@@ -65,6 +83,12 @@ public class DataInputBox extends VBox {
             vySlider.setValue(speed * Math.sin(angle));
             bodies.get(num).setVelocity(getVelocity());
             updating[0] = false;
+
+            speedValue.setText("Speed: " + speed);
+            angleValue.setText("Angle: " + Math.toDegrees(angle));
+            vxValue.setText("SpeedX: " + String.valueOf(vxSlider.getValue()));
+            vyValue.setText("SpeedY: " + String.valueOf(vySlider.getValue()));
+
 
         };
 
@@ -77,6 +101,11 @@ public class DataInputBox extends VBox {
             angleSlider.setValue(Math.toDegrees(Math.atan2(vy, vx)));
             bodies.get(num).setVelocity(getVelocity()); // ← add this
             updating[0] = false;
+
+            speedValue.setText("Speed: " + speedSlider.getValue());
+            angleValue.setText("Angle: " + angleSlider.getValue());
+            vxValue.setText("SpeedX: " + vx);
+            vyValue.setText("SpeedY: " + vy);
         };
 
 
@@ -86,16 +115,24 @@ public class DataInputBox extends VBox {
         vySlider.valueProperty().addListener(vcListener);
 
         massSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            bodies.get(num).setMass(this.getMass());
+            double m = this.getMass();
+            bodies.get(num).setMass(m);
+            massValue.setText("Mass: " + String.valueOf(m));
         });
         centerXSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            bodies.get(num).setCenter(this.getCenter());
+            Vector C = this.getCenter();
+            bodies.get(num).setCenter(C);
+            centerXValue.setText("CenterX: " + String.valueOf(C.getX()));
         });
         centerYSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            bodies.get(num).setCenter(this.getCenter());
+            Vector C = this.getCenter();
+            bodies.get(num).setCenter(C);
+            centerYValue.setText("CenterY: " + String.valueOf(C.getY()));
         });
         radiusSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            bodies.get(num).setRad(this.getRadius());
+            double r = this.getRadius();
+            bodies.get(num).setRad(r);
+            radiusValue.setText("Radius: " + String.valueOf(r));
         });
 
 
@@ -103,22 +140,30 @@ public class DataInputBox extends VBox {
                 VAHeader,
                 speedSubHeader,
                 speedSlider,
+                speedValue,
                 angleSubHeader,
                 angleSlider,
+                angleValue,
                 VCHeader,
                 speedXSubHeader,
                 vxSlider,
+                vxValue,
                 speedYSubHeader,
                 vySlider,
+                vyValue,
                 massHeader,
                 massSlider,
+                massValue,
                 centerHeader,
                 centerXSubHeader,
                 centerXSlider,
+                centerXValue,
                 centerYSubHeader,
                 centerYSlider,
+                centerYValue,
                 radiusHeader,
-                radiusSlider
+                radiusSlider,
+                radiusValue
         );
 
     }
