@@ -13,24 +13,31 @@ import java.util.List;
 
 public class SideBar extends ScrollPane {
     List<DataInputBox> dataInputBoxes = new ArrayList<>();
-    List<ToggleButton> toggleButtons = new ArrayList<>();
+    List<Tab> tabs = new ArrayList<>();
     ToggleGroup grp = new ToggleGroup();
-    HBox tabs = new HBox(5);
+    HBox tabBar = new HBox(1);
     VBox sidebarContentArea = new VBox(10);
+
+
+
+
 
     public SideBar()
     {
         grp.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal == null) return;
-            int index = toggleButtons.indexOf(newVal);
+            int index = tabs.indexOf(newVal);
             sidebarContentArea.getChildren().setAll(dataInputBoxes.get(index));
         });
 
+        setStyle(Constants.sideBarStyle);
+
         setPrefWidth(Constants.sideBarWidth);
         setFitToWidth(true);
+        setFitToHeight(true);
         setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        VBox sideBarContent = new VBox(tabs, sidebarContentArea);
+        VBox sideBarContent = new VBox(tabBar, sidebarContentArea);
         sideBarContent.setStyle("-fx-background-color: #070D0D;");
         setContent(sideBarContent);
     }
@@ -38,10 +45,12 @@ public class SideBar extends ScrollPane {
     public void addNewTab(int i, List<Body> bodies)
     {
         dataInputBoxes.add(new DataInputBox(bodies));
-        toggleButtons.add(new ToggleButton("m" + (i + 1)));
-        toggleButtons.getLast().setToggleGroup(grp);
-        tabs.getChildren().add(toggleButtons.getLast());
+        tabs.add(new Tab("m" + (i + 1)));
+        tabs.getLast().setToggleGroup(grp);
+        tabBar.getChildren().add(tabs.getLast());
     }
+
+
 
 
 
@@ -49,7 +58,7 @@ public class SideBar extends ScrollPane {
 
     public void setDefaultTab()
     {
-        toggleButtons.getLast().setSelected(true);
+        tabs.getLast().setSelected(true);
         sidebarContentArea.getChildren().setAll(dataInputBoxes.getLast());
     }
 
@@ -57,8 +66,8 @@ public class SideBar extends ScrollPane {
     {
         DataInputBox.totalNum = 0;
         dataInputBoxes.clear();
-        toggleButtons.clear();
-        tabs.getChildren().clear();
+        tabs.clear();
+        tabBar.getChildren().clear();
         sidebarContentArea.getChildren().clear();
     }
 }

@@ -35,7 +35,7 @@ public class StartAnimation extends Application {
 
 
         Pane world = new Pane();
-        world.setStyle("-fx-background-color: #F0F0F0;");
+        world.setStyle(Constants.worldStyle);
 
         Grid grid = new Grid();
         world.getChildren().add(grid);

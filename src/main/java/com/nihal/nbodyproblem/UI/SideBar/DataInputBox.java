@@ -30,21 +30,40 @@ public class DataInputBox extends VBox {
     {
         num = totalNum++;
 
-        String headerStyle = "-fx-font-size: 20px; -fx-font-weight: bold;";
-        Label VATitle = new Label("Velocity-Angle");
-        VATitle.setStyle(headerStyle);
+        Label VAHeader = new Label("Velocity-Angle");
+        Label VCHeader = new Label("Velocity Component");
+        Label centerHeader = new Label("Center");
+        Label massHeader = new Label("Mass");
+        Label radiusHeader = new Label("Radius");
 
-        Label VCTitle = new Label("Velocity Component");
-        VCTitle.setStyle(headerStyle);
+        Label speedSubHeader = new Label("Speed");
+        Label angleSubHeader = new Label("Angle");
+        Label speedXSubHeader = new Label("SpeedX");
+        Label speedYSubHeader = new Label("SpeedY");
+        Label centerXSubHeader = new Label("CenterX");
+        Label centerYSubHeader = new Label("centerY");
 
-        Label centerTitle = new Label("Center");
-        centerTitle.setStyle(headerStyle);
+        VAHeader.setStyle(Constants.headerStyle);
+        VCHeader.setStyle(Constants.headerStyle);
+        centerHeader.setStyle(Constants.headerStyle);
+        massHeader.setStyle(Constants.headerStyle);
+        radiusHeader.setStyle(Constants.headerStyle);
 
-        Label massTitle = new Label("Mass");
-        massTitle.setStyle(headerStyle);
+        speedSubHeader.setStyle(Constants.subHeaderStyle);
+        angleSubHeader.setStyle(Constants.subHeaderStyle);
+        speedXSubHeader.setStyle(Constants.subHeaderStyle);
+        speedYSubHeader.setStyle(Constants.subHeaderStyle);
+        centerXSubHeader.setStyle(Constants.subHeaderStyle);
+        centerYSubHeader.setStyle(Constants.subHeaderStyle);
 
-        Label radiusTitle = new Label("Radius");
-        radiusTitle.setStyle(headerStyle);
+        speedSlider.setStyle(Constants.sliderStyle);
+        angleSlider.setStyle(Constants.sliderStyle);
+        vxSlider.setStyle(Constants.sliderStyle);
+        vySlider.setStyle(Constants.sliderStyle);
+        massSlider.setStyle(Constants.sliderStyle);
+        centerXSlider.setStyle(Constants.sliderStyle);
+        centerYSlider.setStyle(Constants.sliderStyle);
+        radiusSlider.setStyle(Constants.sliderStyle);
 
 
         ChangeListener<Number> vaListener = (obs, old, newVal) -> {
@@ -56,9 +75,6 @@ public class DataInputBox extends VBox {
             vySlider.setValue(speed * Math.sin(angle));
             bodies.get(num).setVelocity(getVelocity());
             updating[0] = false;
-
-            System.out.println("va listener "+bodies.get(num).getVelocity().getX() + " " +bodies.get(num).getVelocity().getX());
-
 
         };
 
@@ -94,22 +110,24 @@ public class DataInputBox extends VBox {
 
 
         getChildren().addAll(
-                VATitle,
-                new Label("Speed"),
+                VAHeader,
+                speedSubHeader,
                 speedSlider,
-                new Label("Angle"),
+                angleSubHeader,
                 angleSlider,
-                VCTitle,
-                new Label("SpeedX"),
+                VCHeader,
+                speedXSubHeader,
                 vxSlider,
-                new Label("SpeedY"),
+                speedYSubHeader,
                 vySlider,
-                massTitle,
+                massHeader,
                 massSlider,
-                centerTitle,
+                centerHeader,
+                centerXSubHeader,
                 centerXSlider,
+                centerYSubHeader,
                 centerYSlider,
-                radiusTitle,
+                radiusHeader,
                 radiusSlider
         );
 
