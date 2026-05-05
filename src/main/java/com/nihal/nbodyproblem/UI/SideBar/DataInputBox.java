@@ -43,28 +43,18 @@ public class DataInputBox extends VBox {
         Label centerXSubHeader = new Label("CenterX");
         Label centerYSubHeader = new Label("centerY");
 
-        VAHeader.setStyle(Constants.headerStyle);
-        VCHeader.setStyle(Constants.headerStyle);
-        centerHeader.setStyle(Constants.headerStyle);
-        massHeader.setStyle(Constants.headerStyle);
-        radiusHeader.setStyle(Constants.headerStyle);
+        VAHeader.getStyleClass().add("header-label");
+        VCHeader.getStyleClass().add("header-label");
+        centerHeader.getStyleClass().add("header-label");
+        massHeader.getStyleClass().add("header-label");
+        radiusHeader.getStyleClass().add("header-label");
 
-        speedSubHeader.setStyle(Constants.subHeaderStyle);
-        angleSubHeader.setStyle(Constants.subHeaderStyle);
-        speedXSubHeader.setStyle(Constants.subHeaderStyle);
-        speedYSubHeader.setStyle(Constants.subHeaderStyle);
-        centerXSubHeader.setStyle(Constants.subHeaderStyle);
-        centerYSubHeader.setStyle(Constants.subHeaderStyle);
-
-        speedSlider.setStyle(Constants.sliderStyle);
-        angleSlider.setStyle(Constants.sliderStyle);
-        vxSlider.setStyle(Constants.sliderStyle);
-        vySlider.setStyle(Constants.sliderStyle);
-        massSlider.setStyle(Constants.sliderStyle);
-        centerXSlider.setStyle(Constants.sliderStyle);
-        centerYSlider.setStyle(Constants.sliderStyle);
-        radiusSlider.setStyle(Constants.sliderStyle);
-
+        speedSubHeader.getStyleClass().add("sub-header-label");
+        angleSubHeader.getStyleClass().add("sub-header-label");
+        speedXSubHeader.getStyleClass().add("sub-header-label");
+        speedYSubHeader.getStyleClass().add("sub-header-label");
+        centerXSubHeader.getStyleClass().add("sub-header-label");
+        centerYSubHeader.getStyleClass().add("sub-header-label");
 
         ChangeListener<Number> vaListener = (obs, old, newVal) -> {
             if (updating[0]) return;

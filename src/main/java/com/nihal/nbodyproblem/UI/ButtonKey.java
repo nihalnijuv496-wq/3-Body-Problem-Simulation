@@ -15,9 +15,7 @@ public class ButtonKey extends Button {
     {
         setText(title);
         setPrefSize(Constants.buttonWidth, Constants.buttonHeight);
-        setStyle("-fx-background-color: #ffff00;" +
-                "-fx-text-fill: black;" +
-                "-fx-font-size: 15px");
+        getStyleClass().add("control-button");
         setLayoutX(x);
         setLayoutY(y);
     }

@@ -3,7 +3,6 @@ package com.nihal.nbodyproblem.Animate;
 import com.nihal.nbodyproblem.Timeloop.Timeloop;
 import com.nihal.nbodyproblem.UI.ButtonKey;
 import com.nihal.nbodyproblem.UI.CONTROLBUTTON;
-import com.nihal.nbodyproblem.UI.SideBar.DataInputBox;
 import com.nihal.nbodyproblem.UI.SideBar.SideBar;
 import com.nihal.nbodyproblem.Util.Constants;
 import com.nihal.nbodyproblem.UI.Grid;
@@ -11,16 +10,13 @@ import com.nihal.nbodyproblem.Body.Body;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class StartAnimation extends Application {
@@ -35,7 +31,6 @@ public class StartAnimation extends Application {
 
 
         Pane world = new Pane();
-        world.setStyle(Constants.worldStyle);
 
         Grid grid = new Grid();
         world.getChildren().add(grid);
@@ -78,7 +73,9 @@ public class StartAnimation extends Application {
 
         root.getChildren().addAll(sideBar, world);
         stage.setTitle(Constants.N + "Body Simulation");
-        stage.setScene(new Scene(root, Constants.worldWidth + Constants.sideBarWidth, Constants.worldHeight));
+        Scene scene = new Scene(root, Constants.worldWidth + Constants.sideBarWidth, Constants.worldHeight);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/Styles.css")).toExternalForm());
+        stage.setScene(scene);
         stage.show();
     }
 }

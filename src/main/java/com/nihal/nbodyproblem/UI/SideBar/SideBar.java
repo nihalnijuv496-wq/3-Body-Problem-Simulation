@@ -30,16 +30,17 @@ public class SideBar extends ScrollPane {
             sidebarContentArea.getChildren().setAll(dataInputBoxes.get(index));
         });
 
-        setStyle(Constants.sideBarStyle);
-
         setPrefWidth(Constants.sideBarWidth);
         setFitToWidth(true);
         setFitToHeight(true);
         setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         VBox sideBarContent = new VBox(tabBar, sidebarContentArea);
-        sideBarContent.setStyle("-fx-background-color: #070D0D;");
         setContent(sideBarContent);
+
+        getStyleClass().add("sidebar");
+        tabBar.getStyleClass().add("tab-bar");
+        sideBarContent.getStyleClass().add("sidebar-content");
     }
 
     public void addNewTab(int i, List<Body> bodies)

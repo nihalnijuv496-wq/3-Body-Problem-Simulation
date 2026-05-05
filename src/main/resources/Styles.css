@@ -1,0 +1,163 @@
+
+
+/* Root & Scene */
+
+.root {
+    -fx-font-family: "Monospace";
+    -fx-background-color: #f5f5f5;
+}
+
+
+/* Sidebar */
+
+.sidebar {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 14, 0, 3, 0);
+}
+
+/* to kill the default grey viewport background inside ScrollPane */
+.sidebar > .viewport {
+    -fx-background-color: #ffffff;
+}
+
+.sidebar-content {
+    -fx-background-color: #ffffff;
+    -fx-padding: 0 12 16 12;
+}
+
+.tab-bar {
+    -fx-background-color: #ffffff;
+    -fx-padding: 8 12 0 12;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #eeeeee;
+}
+
+
+/* Tab ToggleButtons */
+
+.tab-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #bbbbbb;
+    -fx-font-size: 13px;
+    -fx-font-family: "Monospace";
+    -fx-font-weight: bold;
+    -fx-padding: 6 10 8 10;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.tab-button:hover {
+    -fx-text-fill: #888888;
+}
+
+.tab-button:selected {
+    -fx-text-fill: #111111;
+    -fx-border-color: #111111;
+}
+
+
+/* Section Headers */
+
+.header-label {
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Monospace";
+    -fx-text-fill: #aaaaaa;
+    -fx-padding: 20 0 2 0;
+}
+
+.sub-header-label {
+    -fx-font-size: 11px;
+    -fx-font-family: "Monospace";
+    -fx-text-fill: #cccccc;
+    -fx-padding: 6 0 0 0;
+}
+
+
+/* Sliders */
+
+.slider .track {
+    -fx-background-color: #e8e8e8;
+    -fx-background-radius: 2px;
+    -fx-pref-height: 2px;
+}
+
+.slider .thumb {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 50%;
+    -fx-pref-width: 16px;
+    -fx-pref-height: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.16), 5, 0, 0, 1);
+}
+
+.slider .thumb:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.26), 7, 0, 0, 2);
+}
+
+.slider:focused .thumb {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.26), 7, 0, 0, 2);
+}
+
+/* hide the tick marks */
+.slider .axis {
+    visibility: hidden;
+}
+
+
+/* Control Buttons (Start / Restart / Reset) */
+
+.control-button {
+    -fx-background-color: #111111;
+    -fx-text-fill: #f5f5f5;
+    -fx-font-size: 13px;
+    -fx-font-family: "Monospace";
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+}
+
+.control-button:hover {
+    -fx-background-color: #333333;
+}
+
+.control-button:pressed {
+    -fx-background-color: #000000;
+}
+
+
+/* ScrollPane chrome */
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 6px;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #dddddd;
+    -fx-background-radius: 3px;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #bbbbbb;
+}
+
+.scroll-bar:vertical .track,
+.scroll-bar:vertical .track-background,
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button,
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-shape: "";
+    -fx-padding: 0;
+}
