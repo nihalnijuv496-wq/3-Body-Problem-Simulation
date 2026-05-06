@@ -1,6 +1,7 @@
 package com.nihal.nbodyproblem.UI.SideBar;
 
 import com.nihal.nbodyproblem.Body.Body;
+import com.nihal.nbodyproblem.Body.BodyWrapper;
 import com.nihal.nbodyproblem.Util.Constants;
 import com.nihal.nbodyproblem.Util.Vector;
 import javafx.beans.value.ChangeListener;
@@ -26,9 +27,11 @@ public class DataInputBox extends VBox {
 
 
     boolean[] updating = {false};
-    public DataInputBox(List<Body> bodies)
+    public DataInputBox(List<BodyWrapper> bodyWrappers)
     {
+
         num = totalNum++;
+
 
         Label VAHeader = new Label("Velocity-Angle");
         Label VCHeader = new Label("Velocity Component");
@@ -80,8 +83,8 @@ public class DataInputBox extends VBox {
             double speed = speedSlider.getValue();
             double angle = Math.toRadians(angleSlider.getValue());
             vxSlider.setValue(speed * Math.cos(angle));
-            vySlider.setValue(speed * Math.sin(angle));
-            bodies.get(num).setVelocity(getVelocity());
+            vySlider.setValue(-1*speed * Math.sin(angle));
+            bodyWrappers.get(num).getBody().setVelocity(getVelocity());
             updating[0] = false;
 
             speedValue.setText("Speed: " + speed);
@@ -89,7 +92,7 @@ public class DataInputBox extends VBox {
             vxValue.setText("SpeedX: " + String.valueOf(vxSlider.getValue()));
             vyValue.setText("SpeedY: " + String.valueOf(vySlider.getValue()));
 
-
+            bodyWrappers.get(num).updateArrow();
         };
 
         ChangeListener<Number> vcListener = (obs, old, newVal) -> {
@@ -97,15 +100,21 @@ public class DataInputBox extends VBox {
             updating[0] = true;
             double vx = vxSlider.getValue();
             double vy = vySlider.getValue();
+
+            double angleDeg = Math.toDegrees(Math.atan2(-1*vy, vx));
+            if (angleDeg < 0) angleDeg += 360;
+            angleSlider.setValue(angleDeg);
             speedSlider.setValue(Math.sqrt(vx*vx + vy*vy));
-            angleSlider.setValue(Math.toDegrees(Math.atan2(vy, vx)));
-            bodies.get(num).setVelocity(getVelocity()); // ← add this
+
+            bodyWrappers.get(num).getBody().setVelocity(getVelocity());
             updating[0] = false;
 
             speedValue.setText("Speed: " + speedSlider.getValue());
             angleValue.setText("Angle: " + angleSlider.getValue());
             vxValue.setText("SpeedX: " + vx);
             vyValue.setText("SpeedY: " + vy);
+
+            bodyWrappers.get(num).updateArrow();
         };
 
 
@@ -116,23 +125,27 @@ public class DataInputBox extends VBox {
 
         massSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             double m = this.getMass();
-            bodies.get(num).setMass(m);
+            bodyWrappers.get(num).getBody().setMass(m);
             massValue.setText("Mass: " + String.valueOf(m));
+            bodyWrappers.get(num).updateArrow();
         });
         centerXSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             Vector C = this.getCenter();
-            bodies.get(num).setCenter(C);
+            bodyWrappers.get(num).getBody().setCenter(C);
             centerXValue.setText("CenterX: " + String.valueOf(C.getX()));
+            bodyWrappers.get(num).updateArrow();
         });
         centerYSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             Vector C = this.getCenter();
-            bodies.get(num).setCenter(C);
+            bodyWrappers.get(num).getBody().setCenter(C);
             centerYValue.setText("CenterY: " + String.valueOf(C.getY()));
+            bodyWrappers.get(num).updateArrow();
         });
         radiusSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             double r = this.getRadius();
-            bodies.get(num).setRad(r);
+            bodyWrappers.get(num).getBody().setRad(r);
             radiusValue.setText("Radius: " + String.valueOf(r));
+            bodyWrappers.get(num).updateArrow();
         });
 
 

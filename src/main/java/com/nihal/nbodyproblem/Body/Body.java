@@ -1,4 +1,5 @@
 package com.nihal.nbodyproblem.Body;
+import com.nihal.nbodyproblem.UI.ArrowIcon.Arrow;
 import com.nihal.nbodyproblem.UI.SideBar.DataInputBox;
 import com.nihal.nbodyproblem.Util.Vector;
 import javafx.scene.shape.Circle;

@@ -1,6 +1,7 @@
 package com.nihal.nbodyproblem.UI;
 
 import com.nihal.nbodyproblem.Body.Body;
+import com.nihal.nbodyproblem.Body.BodyWrapper;
 import com.nihal.nbodyproblem.Timeloop.Timeloop;
 import com.nihal.nbodyproblem.UI.SideBar.SideBar;
 import com.nihal.nbodyproblem.Util.Constants;
@@ -22,7 +23,7 @@ public class ButtonKey extends Button {
 
     static boolean isFirstClick = true;
     public static ButtonKey addControlButton
-            (String title, CONTROLBUTTON type, Timeloop timeloop, int[] numberOfBodies, List<Body> bodies, Pane world, SideBar sb)
+            (String title, CONTROLBUTTON type, Timeloop timeloop, int[] numberOfBodies, List<BodyWrapper> bodyWrappers, Pane world, SideBar sb)
     {
 
         if (type == CONTROLBUTTON.START)
@@ -38,7 +39,7 @@ public class ButtonKey extends Button {
 
                 if (isFirstClick)
                 {
-                    for (Body b: bodies) b.captureInitialFields();
+                    for (BodyWrapper bw: bodyWrappers) bw.getBody().captureInitialFields();
                     isFirstClick = false;
                 }
 
@@ -55,8 +56,8 @@ public class ButtonKey extends Button {
             restartButton.setOnAction(e -> {
                 if (numberOfBodies[0] < Constants.N)
                     return;
-                for(Body body: bodies)
-                    body.resetFieldsToInitial();
+                for(BodyWrapper bw: bodyWrappers)
+                    bw.getBody().resetFieldsToInitial();
                 timeloop.pause();
             });
 
@@ -70,9 +71,9 @@ public class ButtonKey extends Button {
                             (Constants.worldHeight + Constants.buttonHeight + 2*Constants.buttonSpacing)/2);
             resetButton.setOnAction(e -> {
                 numberOfBodies[0] = 0;
-                bodies.clear();
+                bodyWrappers.clear();
                 timeloop.pause();
-                world.getChildren().removeIf(node -> node instanceof Body);
+                world.getChildren().removeIf(node -> node instanceof BodyWrapper);
                 sb.resetAll();
                 isFirstClick = true;
 

@@ -165,3 +165,14 @@
     -fx-shape: "";
     -fx-padding: 0;
 }
+
+/* Arrow Icon */
+
+.arrow .arrow-line {
+    -fx-stroke: #7E7E7E;
+    -fx-stroke-width: 2px;
+}
+
+.arrow .arrow-head {
+    -fx-fill: #7E7E7E;
+}

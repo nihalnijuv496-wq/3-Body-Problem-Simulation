@@ -26,8 +26,8 @@ public class Constants {
     public static final int maxVy = 50;
     public static final int minVx = -50;
     public static final int minVy = -50;
-    public static final double maxV = Math.sqrt(2)*maxVx;
-    public static final double minV = -1*maxV;
+    public static final double maxV = 50;
+    public static final double minV = -50;
     public static final int minMass = 50;
     public static final int maxMass = 500;
     public static final int maxRadius = 100;

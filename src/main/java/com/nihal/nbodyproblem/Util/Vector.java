@@ -33,8 +33,11 @@ public class Vector {
     }
     public Vector scale(double c) { return new Vector(c*this.getX(), c*this.getY()); }
     public double magn() { return Math.sqrt(Math.pow(this.getX(), 2) + Math.pow(this.getY(), 2)); }
-    double dot(Vector B)
+    public double dot(Vector B)
     {
         return (this.x * B.x + this.y * B.y);
     }
+    public double getAngle(Vector B) { return Math.atan2(this.x * B.y - this.y * B.x, this.dot(B)); }
+    public double getAngle(){ return Math.atan2(this.y, this.x); }
+
 }
