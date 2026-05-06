@@ -45,10 +45,10 @@ public class SideBar extends ScrollPane {
         sideBarContent.getStyleClass().add("sidebar-content");
     }
 
-    public void addNewTab(int i, List<BodyWrapper> bodyWrappers)
+    public void addNewTab(int i, List<BodyWrapper> bodyWrappers, double clickedPosX, double clickedPosY)
     {
 
-        dataInputBoxes.add(new DataInputBox(bodyWrappers));
+        dataInputBoxes.add(new DataInputBox(bodyWrappers, clickedPosX, clickedPosY));
         tabs.add(new Tab("m" + (i + 1)));
         tabs.getLast().setToggleGroup(grp);
         tabBar.getChildren().add(tabs.getLast());

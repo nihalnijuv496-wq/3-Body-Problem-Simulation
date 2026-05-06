@@ -27,11 +27,13 @@ public class DataInputBox extends VBox {
 
 
     boolean[] updating = {false};
-    public DataInputBox(List<BodyWrapper> bodyWrappers)
+    public DataInputBox(List<BodyWrapper> bodyWrappers, double clickedPosX, double clickedPosY)
     {
 
         num = totalNum++;
 
+        centerXSlider.setValue(clickedPosX);
+        centerYSlider.setValue(clickedPosY);
 
         Label VAHeader = new Label("Velocity-Angle");
         Label VCHeader = new Label("Velocity Component");
