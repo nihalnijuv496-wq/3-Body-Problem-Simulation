@@ -10,7 +10,10 @@ public class BodyWrapper extends Group {
     public BodyWrapper(Body b)
     {
         this.body = b;
+        double l = body.getVelocity().magn();
         this.arrow =  new Arrow(body.getVelocity().magn(), body.getVelocity().getAngle(), body.getCenter());
+
+        if (l == 0) this.arrow.setVisible(false);
 
         getChildren().addAll(this.body, this.arrow);
     }
@@ -19,7 +22,8 @@ public class BodyWrapper extends Group {
     public void updateArrow()
     {
         arrow.setValues(body.getVelocity(), body.getCenter());
-
+        double l = body.getVelocity().magn();
+        this.arrow.setVisible(l != 0);
     }
 
     public Body getBody(){ return this.body; }

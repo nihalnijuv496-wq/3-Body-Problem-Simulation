@@ -57,7 +57,11 @@ public class ButtonKey extends Button {
                 if (numberOfBodies[0] < Constants.N)
                     return;
                 for(BodyWrapper bw: bodyWrappers)
+                {
                     bw.getBody().resetFieldsToInitial();
+                    bodyWrappers.forEach(BodyWrapper::updateArrow);
+                }
+
                 timeloop.pause();
             });
 
