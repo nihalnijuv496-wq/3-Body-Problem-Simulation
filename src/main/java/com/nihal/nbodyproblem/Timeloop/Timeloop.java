@@ -25,6 +25,7 @@ public class Timeloop{
                 new KeyFrame(Duration.millis((double) 1000 /Constants.fps), e ->{
                     List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
                     physicsEngine.update(bodies);
+                    bodyWrappers.forEach(BodyWrapper::updateArrow);
                 })
         );
         timeloop.setCycleCount(Animation.INDEFINITE);

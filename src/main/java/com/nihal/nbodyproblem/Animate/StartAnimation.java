@@ -14,6 +14,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -73,7 +74,11 @@ public class StartAnimation extends Application {
         //=================================================/
 
 
-
+        sideBar.setPrefWidth(Constants.sideBarWidth);
+        world.setPrefWidth(Constants.worldWidth);
+        world.setPrefHeight(Constants.worldHeight);
+        Rectangle clip = new Rectangle(Constants.worldWidth, Constants.worldHeight);
+        world.setClip(clip);
         root.getChildren().addAll(sideBar, world);
         stage.setTitle(Constants.N + "Body Simulation");
         Scene scene = new Scene(root, Constants.worldWidth + Constants.sideBarWidth, Constants.worldHeight);
