@@ -51,6 +51,8 @@ public class StartAnimation extends Application {
             bodyWrappers.add(new BodyWrapper(new Body(event.getX(), event.getY(), sideBar.getLastDataInputBox())));
             bodyWrappers.getLast().getBody().setFill(Constants.bodyColors[numOfBodies[0]]);
             world.getChildren().add(bodyWrappers.getLast());
+
+            sideBar.addRunTimeDataField(numOfBodies[0], bodyWrappers);
             numOfBodies[0]++;
 
             if (numOfBodies[0] == 1)
@@ -60,7 +62,7 @@ public class StartAnimation extends Application {
         });
 
 
-        Timeloop timeloop = new Timeloop(bodyWrappers);
+        Timeloop timeloop = new Timeloop(bodyWrappers, sideBar.getRunTimeDataTab());
 
         ButtonKey[] controlButtons = {
                 ButtonKey.addControlButton("Start", CONTROLBUTTON.START, timeloop, numOfBodies, bodyWrappers, world, sideBar),

@@ -1,11 +1,8 @@
 package com.nihal.nbodyproblem.UI.SideBar;
 
-import com.nihal.nbodyproblem.Body.Body;
-import com.nihal.nbodyproblem.Body.BodyWrapper;
 import com.nihal.nbodyproblem.Body.BodyWrapper;
 import com.nihal.nbodyproblem.Util.Constants;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,6 +16,8 @@ public class SideBar extends ScrollPane {
     ToggleGroup grp = new ToggleGroup();
     HBox tabBar = new HBox(1);
     VBox sidebarContentArea = new VBox(10);
+    RunTimeDataTab runTimeDataTab = new RunTimeDataTab();
+
 
 
 
@@ -29,7 +28,12 @@ public class SideBar extends ScrollPane {
         grp.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal == null) return;
             int index = tabs.indexOf(newVal);
-            sidebarContentArea.getChildren().setAll(dataInputBoxes.get(index));
+            if (index == 0)
+            {
+                sidebarContentArea.getChildren().setAll(runTimeDataTab);
+                return;
+            }
+            sidebarContentArea.getChildren().setAll(dataInputBoxes.get(index - 1));
         });
 
         setPrefWidth(Constants.sideBarWidth);
@@ -37,6 +41,9 @@ public class SideBar extends ScrollPane {
         setFitToHeight(true);
         setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
+        runTimeDataTab = new RunTimeDataTab();
+
         VBox sideBarContent = new VBox(tabBar, sidebarContentArea);
         setContent(sideBarContent);
 
@@ -48,10 +55,23 @@ public class SideBar extends ScrollPane {
     public void addNewTab(int i, List<BodyWrapper> bodyWrappers, double clickedPosX, double clickedPosY)
     {
 
-        dataInputBoxes.add(new DataInputBox(bodyWrappers, clickedPosX, clickedPosY));
+        if(i == 0)
+        {
+            tabs.add(new Tab("Runtime Data"));
+            tabs.getLast().setToggleGroup(grp);
+            tabBar.getChildren().add(tabs.getLast());
+        }
+
+        dataInputBoxes.add(new DataInputBox(bodyWrappers, clickedPosX, clickedPosY, runTimeDataTab));
+
         tabs.add(new Tab("m" + (i + 1)));
         tabs.getLast().setToggleGroup(grp);
         tabBar.getChildren().add(tabs.getLast());
+    }
+
+    public void addRunTimeDataField(int i, List<BodyWrapper> bodyWrappers)
+    {
+        runTimeDataTab.addRunTimeData(bodyWrappers.get(i).getBody(), bodyWrappers);
     }
 
 
@@ -73,5 +93,8 @@ public class SideBar extends ScrollPane {
         tabs.clear();
         tabBar.getChildren().clear();
         sidebarContentArea.getChildren().clear();
+
     }
+
+    public RunTimeDataTab getRunTimeDataTab() { return runTimeDataTab; }
 }

@@ -1,8 +1,10 @@
 package com.nihal.nbodyproblem.Body;
-import com.nihal.nbodyproblem.UI.ArrowIcon.Arrow;
 import com.nihal.nbodyproblem.UI.SideBar.DataInputBox;
+import com.nihal.nbodyproblem.Util.Constants;
 import com.nihal.nbodyproblem.Util.Vector;
 import javafx.scene.shape.Circle;
+
+import java.util.List;
 
 public class Body extends Circle {
     private double radius;
@@ -87,5 +89,19 @@ public class Body extends Circle {
         setCenterY(center.getY());
         setRadius(radius);
     }
+
+    public double getKineticEnergy(){ return 0.5* mass* Math.pow(velocity.magn(), 2); }
+    public double getPotentialEnergy(List<Body> bodies)
+    {
+        double pe = 0;
+        for (Body b: bodies)
+        {
+            if (this == b) continue;
+            pe += Constants.G * this.mass * b.mass / (this.center.sub(b.center).magn());
+        }
+        return pe;
+    }
+    public double getTotalEnergy(List<Body> bodies)
+    { return this.getKineticEnergy() + this.getPotentialEnergy(bodies); }
 
 }

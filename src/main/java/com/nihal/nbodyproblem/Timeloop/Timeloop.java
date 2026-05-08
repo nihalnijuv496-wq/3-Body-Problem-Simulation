@@ -3,6 +3,7 @@ package com.nihal.nbodyproblem.Timeloop;
 import com.nihal.nbodyproblem.Body.Body;
 import com.nihal.nbodyproblem.Body.BodyWrapper;
 import com.nihal.nbodyproblem.Engine.PhysicsEngine;
+import com.nihal.nbodyproblem.UI.SideBar.RunTimeDataTab;
 import com.nihal.nbodyproblem.Util.Constants;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -17,7 +18,7 @@ public class Timeloop{
     private final PhysicsEngine physicsEngine = new PhysicsEngine();
     private Timeline timeloop;
 
-    public Timeloop(List<BodyWrapper> bodyWrappers)
+    public Timeloop(List<BodyWrapper> bodyWrappers, RunTimeDataTab runTimeDataTab)
     {
         this.bodyWrappers = bodyWrappers;
 
@@ -26,6 +27,7 @@ public class Timeloop{
                     List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
                     physicsEngine.update(bodies);
                     bodyWrappers.forEach(BodyWrapper::updateArrow);
+                    runTimeDataTab.updateValues(bodyWrappers);
                 })
         );
         timeloop.setCycleCount(Animation.INDEFINITE);

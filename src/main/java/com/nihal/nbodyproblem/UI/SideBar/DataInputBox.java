@@ -1,6 +1,5 @@
 package com.nihal.nbodyproblem.UI.SideBar;
 
-import com.nihal.nbodyproblem.Body.Body;
 import com.nihal.nbodyproblem.Body.BodyWrapper;
 import com.nihal.nbodyproblem.Util.Constants;
 import com.nihal.nbodyproblem.Util.Vector;
@@ -27,7 +26,7 @@ public class DataInputBox extends VBox {
 
 
     boolean[] updating = {false};
-    public DataInputBox(List<BodyWrapper> bodyWrappers, double clickedPosX, double clickedPosY)
+    public DataInputBox(List<BodyWrapper> bodyWrappers, double clickedPosX, double clickedPosY, RunTimeDataTab runTimeDataTab)
     {
 
         num = totalNum++;
@@ -93,8 +92,9 @@ public class DataInputBox extends VBox {
             angleValue.setText("Angle: " + Math.toDegrees(angle));
             vxValue.setText("SpeedX: " + String.valueOf(vxSlider.getValue()));
             vyValue.setText("SpeedY: " + String.valueOf(vySlider.getValue()));
-
             bodyWrappers.get(num).updateArrow();
+
+            runTimeDataTab.updateValues(bodyWrappers);
         };
 
         ChangeListener<Number> vcListener = (obs, old, newVal) -> {
@@ -117,6 +117,8 @@ public class DataInputBox extends VBox {
             vyValue.setText("SpeedY: " + vy);
 
             bodyWrappers.get(num).updateArrow();
+
+            runTimeDataTab.updateValues(bodyWrappers);
         };
 
 
@@ -130,24 +132,28 @@ public class DataInputBox extends VBox {
             bodyWrappers.get(num).getBody().setMass(m);
             massValue.setText("Mass: " + String.valueOf(m));
             bodyWrappers.get(num).updateArrow();
+            runTimeDataTab.updateValues(bodyWrappers);
         });
         centerXSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             Vector C = this.getCenter();
             bodyWrappers.get(num).getBody().setCenter(C);
             centerXValue.setText("CenterX: " + String.valueOf(C.getX()));
             bodyWrappers.get(num).updateArrow();
+            runTimeDataTab.updateValues(bodyWrappers);
         });
         centerYSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             Vector C = this.getCenter();
             bodyWrappers.get(num).getBody().setCenter(C);
             centerYValue.setText("CenterY: " + String.valueOf(C.getY()));
             bodyWrappers.get(num).updateArrow();
+            runTimeDataTab.updateValues(bodyWrappers);
         });
         radiusSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             double r = this.getRadius();
             bodyWrappers.get(num).getBody().setRad(r);
             radiusValue.setText("Radius: " + String.valueOf(r));
             bodyWrappers.get(num).updateArrow();
+            runTimeDataTab.updateValues(bodyWrappers);
         });
 
 

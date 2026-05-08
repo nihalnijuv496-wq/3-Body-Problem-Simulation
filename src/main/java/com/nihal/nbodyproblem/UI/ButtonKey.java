@@ -63,6 +63,7 @@ public class ButtonKey extends Button {
                 }
 
                 timeloop.pause();
+                sb.getRunTimeDataTab().updateValues(bodyWrappers);
             });
 
             return restartButton;
@@ -78,6 +79,8 @@ public class ButtonKey extends Button {
                 bodyWrappers.clear();
                 timeloop.pause();
                 world.getChildren().removeIf(node -> node instanceof BodyWrapper);
+
+                sb.getRunTimeDataTab().resetAll();
                 sb.resetAll();
                 isFirstClick = true;
 
