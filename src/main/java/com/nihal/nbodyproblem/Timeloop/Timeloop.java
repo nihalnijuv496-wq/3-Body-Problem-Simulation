@@ -25,7 +25,7 @@ public class Timeloop{
         this.timeloop = new Timeline(
                 new KeyFrame(Duration.millis((double) 1000 /Constants.fps), e ->{
                     List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
-                    physicsEngine.update(bodies);
+                    physicsEngine.updateVerletWithAdaptiveTimeStep(bodies);
                     bodyWrappers.forEach(BodyWrapper::updateArrow);
                     runTimeDataTab.updateValues(bodyWrappers);
                 })

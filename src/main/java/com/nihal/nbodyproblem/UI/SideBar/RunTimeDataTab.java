@@ -11,6 +11,18 @@ import java.util.List;
 public class RunTimeDataTab extends VBox {
 
     List<DataDisplayBox> dataDisplayBoxes = new ArrayList<>();
+    Label totalSystemEnergyHeader;
+    Label totalSystemEnergyValue;
+
+    public RunTimeDataTab()
+    {
+        totalSystemEnergyValue = new Label("0");
+        totalSystemEnergyHeader = new Label("Total System Energy: ");
+        totalSystemEnergyValue.getStyleClass().add("header-label");
+        totalSystemEnergyHeader.getStyleClass().add("header-label");
+        getChildren().addAll(totalSystemEnergyHeader, totalSystemEnergyValue);
+    }
+
 
     private class DataDisplayBox extends VBox{
         Label velocityValue;
@@ -21,6 +33,7 @@ public class RunTimeDataTab extends VBox {
 
         DataDisplayBox(Body body, List<BodyWrapper> bodyWrappers)
         {
+            Label BodyHeader = new Label("Body " + String.valueOf(bodyWrappers.size()));
             Label velocityHeader = new Label("Velocity: ");
             Label positionHeader = new Label("Position: ");
             Label KEHeader = new Label("Kinetic Energy: ");
@@ -45,6 +58,7 @@ public class RunTimeDataTab extends VBox {
             KEHeader.getStyleClass().add("sub-header-label");
             PEHeader.getStyleClass().add("sub-header-label");
             TEHeader.getStyleClass().add("sub-header-label");
+            BodyHeader.getStyleClass().add("header-label");
 
             velocityValue.getStyleClass().add("sub-header-label");
             positionValue.getStyleClass().add("sub-header-label");
@@ -53,7 +67,9 @@ public class RunTimeDataTab extends VBox {
             TEValue.getStyleClass().add("sub-header-label");
 
 
+
             getChildren().addAll(
+                    BodyHeader,
               velocityHeader, velocityValue,
               positionHeader, positionValue,
               KEHeader, KEValue,
@@ -65,14 +81,20 @@ public class RunTimeDataTab extends VBox {
 
     public void addRunTimeData(Body body, List<BodyWrapper> bodyWrappers)
     {
+
         dataDisplayBoxes.add(new DataDisplayBox(body, bodyWrappers));
         getChildren().add(dataDisplayBoxes.getLast());
+        totalSystemEnergyHeader.toFront();
+        totalSystemEnergyValue.toFront();
         updateValues(bodyWrappers);
     }
 
     public void updateValues(List<BodyWrapper> bodyWrappers)
     {
         List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
+        double totalSystemKE = 0;
+        double totalSystemPE = 0;
+
         for (int i = 0; i < bodyWrappers.size(); ++i)
         {
             Body body = bodies.get(i);
@@ -85,16 +107,24 @@ public class RunTimeDataTab extends VBox {
             double kineticEnergy = body.getKineticEnergy();
             double potentialEnergy = body.getPotentialEnergy(bodies);
             double totalEnergy = kineticEnergy + potentialEnergy;
-
+            totalSystemKE += kineticEnergy;
+            totalSystemPE += potentialEnergy;
             db.KEValue.setText(String.valueOf(kineticEnergy));
             db.PEValue.setText(String.valueOf(potentialEnergy));
             db.TEValue.setText(String.valueOf(totalEnergy));
         }
+        totalSystemPE /= 2;
+        totalSystemEnergyValue.setText(String.valueOf(totalSystemKE + totalSystemPE));
     }
 
     public void resetAll()
     {
         dataDisplayBoxes.clear();
         getChildren().clear();
+        totalSystemEnergyValue = new Label("0");
+        totalSystemEnergyHeader = new Label("Total System Energy: ");
+        totalSystemEnergyValue.getStyleClass().add("header-label");
+        totalSystemEnergyHeader.getStyleClass().add("header-label");
+        getChildren().addAll(totalSystemEnergyHeader, totalSystemEnergyValue);
     }
 }

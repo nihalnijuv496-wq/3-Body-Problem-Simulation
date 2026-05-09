@@ -97,11 +97,24 @@ public class Body extends Circle {
         for (Body b: bodies)
         {
             if (this == b) continue;
-            pe += Constants.G * this.mass * b.mass / (this.center.sub(b.center).magn());
+            double r = this.center.sub(b.center).magn();
+            if (r == 0) return Double.MAX_VALUE;
+            pe += -1*Constants.G * this.mass * b.mass / Math.sqrt(Math.pow(r, 2) + Math.pow(Constants.epsilon, 2));
         }
         return pe;
     }
     public double getTotalEnergy(List<Body> bodies)
     { return this.getKineticEnergy() + this.getPotentialEnergy(bodies); }
+
+    public static double getTotalSystemEnergy(List<BodyWrapper> bodyWrappers)
+    {
+        List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
+        double totEnergy = 0;
+        for (Body b : bodies)
+        {
+            totEnergy += b.getTotalEnergy(bodies);
+        }
+        return totEnergy;
+    }
 
 }

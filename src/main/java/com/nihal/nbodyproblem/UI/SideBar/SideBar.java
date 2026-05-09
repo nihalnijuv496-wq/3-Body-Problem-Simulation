@@ -16,7 +16,7 @@ public class SideBar extends ScrollPane {
     ToggleGroup grp = new ToggleGroup();
     HBox tabBar = new HBox(1);
     VBox sidebarContentArea = new VBox(10);
-    RunTimeDataTab runTimeDataTab = new RunTimeDataTab();
+    RunTimeDataTab runTimeDataTab;
 
 
 
