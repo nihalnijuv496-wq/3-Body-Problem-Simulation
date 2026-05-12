@@ -1,6 +1,6 @@
 # N-Body Gravitational Simulator
 
-A JavaFX desktop simulation of the classical N-body gravitational problem. Currently, place 3 bodies on a grid, configure their physical properties, and watch them interact under Newtonian gravity using Velocity Verlet integration.
+A JavaFX desktop simulation of the classical N-body gravitational problem. Place 3 bodies on a grid, configure their physical properties, and watch them interact under Newtonian gravity using Velocity Verlet integration.
 
 ---
 
@@ -10,6 +10,9 @@ A JavaFX desktop simulation of the classical N-body gravitational problem. Curre
 - Per-body sidebar controls for velocity, mass, radius, and position
 - Dual velocity input — set velocity by speed + angle, or directly by Vx/Vy components, with both staying in sync
 - Velocity arrow rendered on each body, updating in real time as sliders change
+- **Preset configurations** — one-click setup for known stable orbits (currently: Lagrange equilateral triangle)
+- **Runtime Data tab** — live readout of each body's velocity, position, kinetic energy, potential energy, and total energy; also shows total system energy
+- **Orbital trail fading** — each body leaves a fading dot trail as it moves, visualising the path over time
 - Start / Pause, Restart, and Reset controls
 - Restart resets bodies to the exact state they were in when Start was first pressed
 - Velocity Verlet integration for stable, accurate orbital physics
@@ -19,6 +22,8 @@ A JavaFX desktop simulation of the classical N-body gravitational problem. Curre
 ---
 
 ## How to Use
+
+### Placing bodies manually
 
 1. **Place bodies** — click anywhere on the grid. Each click places one body at that position and opens a tab for it in the sidebar. You need exactly 3 bodies to start.
 
@@ -34,6 +39,24 @@ A JavaFX desktop simulation of the classical N-body gravitational problem. Curre
 4. **Restart** — resets all bodies to their positions, velocities, and properties at the moment Start was first clicked.
 
 5. **Reset** — clears everything so you can place new bodies from scratch.
+
+### Using presets
+
+Click a preset button in the sidebar (visible before any bodies are placed) to automatically configure all 3 bodies into a known stable configuration.
+
+**Equilateral Triangle (Lagrange L4/L5)** — places 3 equal-mass bodies at the vertices of an equilateral triangle with velocities tuned for a circular orbit around their common centre of mass. Once loaded:
+- Most sliders are locked to preserve the solution's constraints
+- **Mass** and **Radius** sliders remain editable
+- Changing mass on any body updates all three simultaneously and recalculates the required orbital velocities
+- A **Triangle Side** slider is added to each tab, letting you scale the triangle while the velocities adjust automatically
+
+### Monitoring the simulation
+
+Switch to the **Runtime Data** tab (the first tab, available once bodies are placed) to see live values for each body:
+- Velocity — magnitude, angle, and Vx/Vy components
+- Position — current centre coordinates
+- Kinetic Energy, Potential Energy, and Total Energy per body
+- **Total System Energy** at the top — useful for checking whether energy is being conserved over time
 
 ---
 
@@ -51,12 +74,12 @@ where `ε` (epsilon) is a softening parameter that prevents the force from blowi
 
 Constants (configurable in `Constants.java`):
 
-| Constant | Value | Description |
-|----------|-------|-------------|
-| G | 100 | Gravitational constant |
-| epsilon | 5 | Softening parameter |
-| timeStep | 0.5 | Physics step size |
-| fps | 100 | Simulation frame rate |
+| Constant  | Value | Description                          |
+|-----------|-------|--------------------------------------|
+| G         | 100   | Gravitational constant               |
+| epsilon   | 15    | Softening parameter                  |
+| timeStep  | 0.1   | Physics step size                    |
+| fps       | 100   | Simulation frame rate                |
 
 ---
 
@@ -76,13 +99,14 @@ src/main/java/com/nihal/nbodyproblem/
 ├── Body/           — Body and BodyWrapper (body + velocity arrow)
 ├── Engine/         — Velocity Verlet physics engine
 ├── Launcher/       — Main class
+├── Presets/        — Preset configurations (Lagrange equilateral triangle)
 ├── Timeloop/       — JavaFX animation loop
 ├── UI/
 │   ├── ArrowIcon/  — Velocity arrow (line + triangle arrowhead)
-│   ├── SideBar/    — Sidebar, tabs, and per-body slider controls
+│   ├── SideBar/    — Sidebar, tabs, per-body slider controls, runtime data tab, and preset buttons
 │   ├── ButtonKey   — Control buttons (Start, Restart, Reset)
 │   └── Grid        — Background grid
-└── Util/           — Vector math and simulation constants
+└── Util/           — Vector math, simulation constants, preset helpers, and trail fade logic
 
 src/main/resources/
 └── Styles.css      — UI theme
