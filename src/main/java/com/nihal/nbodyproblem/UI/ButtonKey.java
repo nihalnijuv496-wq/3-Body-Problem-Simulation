@@ -7,6 +7,7 @@ import com.nihal.nbodyproblem.UI.SideBar.SideBar;
 import com.nihal.nbodyproblem.Util.Constants;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 
 import java.util.List;
 
@@ -93,6 +94,7 @@ public class ButtonKey extends Button {
         bodyWrappers.clear();
         timeloop.pause();
         world.getChildren().removeIf(node -> node instanceof BodyWrapper);
+        world.getChildren().removeIf(node -> node instanceof Circle);
 
         sb.getRunTimeDataTab().resetAll();
         sb.resetAll(bodyWrappers, world);

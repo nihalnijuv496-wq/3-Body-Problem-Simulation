@@ -5,9 +5,11 @@ import com.nihal.nbodyproblem.Body.BodyWrapper;
 import com.nihal.nbodyproblem.Engine.PhysicsEngine;
 import com.nihal.nbodyproblem.UI.SideBar.RunTimeDataTab;
 import com.nihal.nbodyproblem.Util.Constants;
+import com.nihal.nbodyproblem.Util.FadeProperty;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -18,13 +20,14 @@ public class Timeloop{
     private final PhysicsEngine physicsEngine = new PhysicsEngine();
     private Timeline timeloop;
 
-    public Timeloop(List<BodyWrapper> bodyWrappers, RunTimeDataTab runTimeDataTab)
+    public Timeloop(List<BodyWrapper> bodyWrappers, RunTimeDataTab runTimeDataTab, Pane world)
     {
         this.bodyWrappers = bodyWrappers;
 
         this.timeloop = new Timeline(
                 new KeyFrame(Duration.millis((double) 1000 /Constants.fps), e ->{
                     List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
+                    FadeProperty.addFadeToBodies(bodies, world);
                     physicsEngine.updateVerletWithAdaptiveTimeStep(bodies);
                     bodyWrappers.forEach(BodyWrapper::updateArrow);
                     runTimeDataTab.updateValues(bodyWrappers);

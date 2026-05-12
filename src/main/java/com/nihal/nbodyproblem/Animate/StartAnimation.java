@@ -62,7 +62,7 @@ public class StartAnimation extends Application {
         });
 
 
-        Timeloop timeloop = new Timeloop(bodyWrappers, sideBar.getRunTimeDataTab());
+        Timeloop timeloop = new Timeloop(bodyWrappers, sideBar.getRunTimeDataTab(), world);
 
         ButtonKey[] controlButtons = {
                 ButtonKey.addControlButton("Start", CONTROLBUTTON.START, timeloop, numOfBodies, bodyWrappers, world, sideBar),
