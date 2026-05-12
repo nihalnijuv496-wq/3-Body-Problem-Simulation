@@ -73,6 +73,8 @@ public class Body extends Circle {
         initialCenter = new Vector(center.getX(), center.getY());
         initialVelocity = new Vector(velocity.getX(), velocity.getY());
         initialAcceleration = new Vector(acceleration.getX(), acceleration.getY());
+
+
     }
 
     public void resetFieldsToInitial()
@@ -116,5 +118,7 @@ public class Body extends Circle {
         }
         return totEnergy;
     }
+
+
 
 }

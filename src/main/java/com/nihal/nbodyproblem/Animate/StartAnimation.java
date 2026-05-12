@@ -39,7 +39,7 @@ public class StartAnimation extends Application {
         world.getChildren().add(grid);
 
         List<BodyWrapper> bodyWrappers = new ArrayList<>();
-        SideBar sideBar = new SideBar();
+        SideBar sideBar = new SideBar(bodyWrappers, world);
 
         int[] numOfBodies = {0};
 

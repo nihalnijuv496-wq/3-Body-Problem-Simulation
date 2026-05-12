@@ -198,4 +198,13 @@ public class DataInputBox extends VBox {
     public Vector getVelocity() { return new Vector(vxSlider.getValue(), vySlider.getValue()); }
     public Vector getCenter() { return new Vector(centerXSlider.getValue(), centerYSlider.getValue()); }
     public double getRadius() { return radiusSlider.getValue(); }
+
+    public List<Slider> getSliders()
+    {
+        return List.of(
+            speedSlider, angleSlider,
+            vxSlider, vySlider,
+            massSlider, radiusSlider,
+            centerXSlider, centerYSlider);
+    }
 }

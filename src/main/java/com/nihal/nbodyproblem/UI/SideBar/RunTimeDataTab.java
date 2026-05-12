@@ -2,6 +2,7 @@ package com.nihal.nbodyproblem.UI.SideBar;
 
 import com.nihal.nbodyproblem.Body.Body;
 import com.nihal.nbodyproblem.Body.BodyWrapper;
+import com.nihal.nbodyproblem.Util.Vector;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -115,6 +116,8 @@ public class RunTimeDataTab extends VBox {
         }
         totalSystemPE /= 2;
         totalSystemEnergyValue.setText(String.valueOf(totalSystemKE + totalSystemPE));
+
+
     }
 
     public void resetAll()

@@ -44,4 +44,9 @@ public class Timeloop{
         else
             timeloop.play();
     }
+
+    public void initializeAccelerations(List<Body> bodies)
+    {
+        physicsEngine.initializeAccelerations(bodies);
+    }
 };

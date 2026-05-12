@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 public class Constants {
     public static final int N = 3;
     public static final int fps = 100;
-    public static final double timeStep = 0.1;
+    public static final double timeStep = 0.05;
 
     public static final int worldWidth = 1200;
     public static final int worldHeight = 700;
@@ -20,8 +20,10 @@ public class Constants {
     public static final int buttonSpacing = 50;
 
     public static final double G = 100;
-    public static final int epsilon = 50;
+    public static final int epsilon = 15;
 
+    public static final int defaultCMassX = Constants.worldWidth/2;
+    public static final int defaultCMassY = Constants.worldHeight/2;
     public static final int maxVx = 50;
     public static final int maxVy = 50;
     public static final int minVx = -50;

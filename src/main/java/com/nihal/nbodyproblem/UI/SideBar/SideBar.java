@@ -1,10 +1,13 @@
 package com.nihal.nbodyproblem.UI.SideBar;
 
 import com.nihal.nbodyproblem.Body.BodyWrapper;
+import com.nihal.nbodyproblem.Presets.Presets;
 import com.nihal.nbodyproblem.Util.Constants;
+import com.nihal.nbodyproblem.Util.PresetUtils;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -17,13 +20,14 @@ public class SideBar extends ScrollPane {
     HBox tabBar = new HBox(1);
     VBox sidebarContentArea = new VBox(10);
     RunTimeDataTab runTimeDataTab;
+    List<PresetButton> presetsButtons = new ArrayList<>();
 
 
 
 
 
 
-    public SideBar()
+    public SideBar(List<BodyWrapper> bodyWrappers, Pane world)
     {
         grp.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal == null) return;
@@ -44,7 +48,10 @@ public class SideBar extends ScrollPane {
 
         runTimeDataTab = new RunTimeDataTab();
 
+        setPresets(bodyWrappers, world);
+
         VBox sideBarContent = new VBox(tabBar, sidebarContentArea);
+
         setContent(sideBarContent);
 
         getStyleClass().add("sidebar");
@@ -57,6 +64,7 @@ public class SideBar extends ScrollPane {
 
         if(i == 0)
         {
+
             tabs.add(new Tab("Runtime Data"));
             tabs.getLast().setToggleGroup(grp);
             tabBar.getChildren().add(tabs.getLast());
@@ -80,19 +88,35 @@ public class SideBar extends ScrollPane {
 
     public DataInputBox getLastDataInputBox(){ return dataInputBoxes.getLast();}
 
+    public List<DataInputBox> getDataInputBoxes() {
+        return dataInputBoxes;
+    }
+
     public void setDefaultTab()
     {
         tabs.getLast().setSelected(true);
         sidebarContentArea.getChildren().setAll(dataInputBoxes.getLast());
     }
 
-    public void resetAll()
+    private void setPresets(List<BodyWrapper> bodyWrappers, Pane world)
+    {
+        Presets[] presets = Presets.values();
+        for(Presets p : presets)
+        {
+            presetsButtons.add(new PresetButton(p, bodyWrappers, world, this));
+            sidebarContentArea.getChildren().add(presetsButtons.getLast());
+        }
+    }
+
+    public void resetAll(List<BodyWrapper> bodyWrappers, Pane world)
     {
         DataInputBox.totalNum = 0;
         dataInputBoxes.clear();
         tabs.clear();
         tabBar.getChildren().clear();
         sidebarContentArea.getChildren().clear();
+        setPresets(bodyWrappers, world);
+        PresetUtils.resetAll();
 
     }
 

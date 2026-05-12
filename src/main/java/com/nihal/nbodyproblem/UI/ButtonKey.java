@@ -35,14 +35,15 @@ public class ButtonKey extends Button {
             startButton.setOnAction(e -> {
                 if (numberOfBodies[0] < Constants.N)
                     return;
-                timeloop.pauseOrPlay();
 
                 if (isFirstClick)
                 {
-                    for (BodyWrapper bw: bodyWrappers) bw.getBody().captureInitialFields();
+                    List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
+                    for (Body b : bodies) b.captureInitialFields();
+                    timeloop.initializeAccelerations(bodies);
                     isFirstClick = false;
                 }
-
+                timeloop.pauseOrPlay();
             });
 
             return startButton;
@@ -75,22 +76,26 @@ public class ButtonKey extends Button {
                             Constants.worldWidth - Constants.buttonWidth - Constants.cellWidth,
                             (Constants.worldHeight + Constants.buttonHeight + 2*Constants.buttonSpacing)/2);
             resetButton.setOnAction(e -> {
-                numberOfBodies[0] = 0;
-                bodyWrappers.clear();
-                timeloop.pause();
-                world.getChildren().removeIf(node -> node instanceof BodyWrapper);
-
-                sb.getRunTimeDataTab().resetAll();
-                sb.resetAll();
+                resetAll(timeloop, numberOfBodies, bodyWrappers, world, sb);
                 isFirstClick = true;
-
-
             });
 
             return resetButton;
         }
 
         return null;
+    }
+
+    public static void resetAll
+            (Timeloop timeloop, int[] numberOfBodies, List<BodyWrapper> bodyWrappers, Pane world, SideBar sb)
+    {
+        numberOfBodies[0] = 0;
+        bodyWrappers.clear();
+        timeloop.pause();
+        world.getChildren().removeIf(node -> node instanceof BodyWrapper);
+
+        sb.getRunTimeDataTab().resetAll();
+        sb.resetAll(bodyWrappers, world);
     }
 
 }

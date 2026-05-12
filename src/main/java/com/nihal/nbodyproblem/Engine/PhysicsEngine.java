@@ -98,11 +98,24 @@ public class PhysicsEngine {
             for (int j = i+1; j < bodies.size(); ++j)
                 minDist = Math.min(minDist, bodies.get(i).getCenter().sub(bodies.get(j).getCenter()).magn());
 
-        int subStepCount = (int) Math.max(1, Math.min(20, 500/minDist));
+        int subStepCount = (int) Math.max(1, Math.min(50, 500/minDist));
         adaptiveTimeStep = Constants.timeStep/subStepCount;
 
         for (int i = 0; i < subStepCount; ++i)
             updateVerletWithAdaptiveTimeStepUpdate(bodies, adaptiveTimeStep);
     }
 
+    public void initializeAccelerations(List<Body> bodies) {
+        for (Body body : bodies) {
+            body.setAcceleration(new Vector(0, 0));
+            for (Body other : bodies) {
+                if (body.equals(other)) continue;
+                Vector displacement = other.getCenter().sub(body.getCenter());
+                double distance = displacement.magn();
+                double softenedDistance = Math.sqrt(distance * distance + Constants.epsilon * Constants.epsilon);
+                double scalingFactorAcc = Constants.G * other.getMass() / Math.pow(softenedDistance, 3);
+                body.setAcceleration(body.getAcceleration().add(displacement.scale(scalingFactorAcc)));
+            }
+        }
+    }
 }
