@@ -51,7 +51,6 @@ public class StartAnimation extends Application {
             bodyWrappers.add(new BodyWrapper(new Body(event.getX(), event.getY(), sideBar.getLastDataInputBox())));
             bodyWrappers.getLast().getBody().setFill(Constants.bodyColors[numOfBodies[0]]);
             world.getChildren().add(bodyWrappers.getLast());
-
             sideBar.addRunTimeDataField(numOfBodies[0], bodyWrappers);
             numOfBodies[0]++;
 
@@ -59,6 +58,7 @@ public class StartAnimation extends Application {
             {
                 sideBar.setDefaultTab();
             }
+
         });
 
 

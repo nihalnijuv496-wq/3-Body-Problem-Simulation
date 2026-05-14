@@ -65,7 +65,7 @@ public class ButtonKey extends Button {
                 }
 
                 timeloop.pause();
-                sb.getRunTimeDataTab().updateValues(bodyWrappers);
+                sb.getRunTimeDataTab().updateValues();
             });
 
             return restartButton;
@@ -98,6 +98,7 @@ public class ButtonKey extends Button {
 
         sb.getRunTimeDataTab().resetAll();
         sb.resetAll(bodyWrappers, world);
+        timeloop.resetAll();
     }
 
 }

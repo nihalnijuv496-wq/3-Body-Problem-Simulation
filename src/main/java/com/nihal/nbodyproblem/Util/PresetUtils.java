@@ -54,7 +54,7 @@ public class PresetUtils {
         return new Vector(0,0);
     }
 
-    public static Slider getSideLengthSlider(SideBar sideBar, List<Body> bodies)
+    public static Slider getSideLengthSlider(SideBar sideBar, List<Body> bodies, List<Slider> lengthSliders)
     {
         Slider lengthSlider = new Slider(1, 500, 100);
         lengthSlider.valueProperty().addListener((observable, oldValue, newValue) ->
@@ -64,21 +64,17 @@ public class PresetUtils {
             List<DataInputBox> dataInputBoxes = sideBar.getDataInputBoxes();
             for (int i = 0; i < dataInputBoxes.size(); ++i)
             {
-                List<Slider> sliders = dataInputBoxes.get(i).getSliders();
-                sliders.get(6).setValue(bodyPos.get(i).getX());
-                sliders.get(7).setValue(bodyPos.get(i).getY());
+                DataInputBox db = sideBar.getDataInputBoxes().get(i);
+                db.getCenterXSlider().setValue(bodyPos.get(i).getX());
+                db.getCenterYSlider().setValue(bodyPos.get(i).getY());
 
                 Vector velocity = getVelocityForEquilateralTriangleSolution(currLength, bodies, i);
-                sliders.get(2).setValue(velocity.getX());
-                sliders.get(3).setValue(velocity.getY());
+                db.getVxSlider().setValue(velocity.getX());
+                db.getVySlider().setValue(velocity.getY());
             }
-            for (Slider s: Lagrange.lengthSliders) s.setValue(currLength);
+            for (Slider s: lengthSliders) s.setValue(currLength);
         });
         return lengthSlider;
     }
 
-    public static void resetAll()
-    {
-        Lagrange.lengthSliders.clear();
-    }
 }

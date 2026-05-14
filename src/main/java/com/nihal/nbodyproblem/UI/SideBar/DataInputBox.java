@@ -47,14 +47,14 @@ public class DataInputBox extends VBox {
         Label centerXSubHeader = new Label("CenterX");
         Label centerYSubHeader = new Label("centerY");
 
-        Label speedValue = new Label("Speed: " + String.valueOf(speedSlider.getValue()));
-        Label angleValue = new Label("Angle: " + String.valueOf(angleSlider.getValue()));
-        Label vxValue = new Label("SpeedX: " + String.valueOf(vxSlider.getValue()));
-        Label vyValue = new Label("SpeedY: " + String.valueOf(vySlider.getValue()));
-        Label centerXValue = new Label("CenterX: " + String.valueOf(centerXSlider.getValue()));
-        Label centerYValue = new Label("CenterY: " + String.valueOf(centerYSlider.getValue()));
-        Label radiusValue = new Label("Radius: " + String.valueOf(radiusSlider.getValue()));
-        Label massValue = new Label("Mass: " + String.valueOf(massSlider.getValue()));
+        Label speedValue = new Label("Speed: " + speedSlider.getValue());
+        Label angleValue = new Label("Angle: " + angleSlider.getValue());
+        Label vxValue = new Label("SpeedX: " + vxSlider.getValue());
+        Label vyValue = new Label("SpeedY: " + vySlider.getValue());
+        Label centerXValue = new Label("CenterX: " + centerXSlider.getValue());
+        Label centerYValue = new Label("CenterY: " + centerYSlider.getValue());
+        Label radiusValue = new Label("Radius: " + radiusSlider.getValue());
+        Label massValue = new Label("Mass: " + massSlider.getValue());
 
         VAHeader.getStyleClass().add("header-label");
         VCHeader.getStyleClass().add("header-label");
@@ -90,11 +90,11 @@ public class DataInputBox extends VBox {
 
             speedValue.setText("Speed: " + speed);
             angleValue.setText("Angle: " + Math.toDegrees(angle));
-            vxValue.setText("SpeedX: " + String.valueOf(vxSlider.getValue()));
-            vyValue.setText("SpeedY: " + String.valueOf(vySlider.getValue()));
+            vxValue.setText("SpeedX: " + vxSlider.getValue());
+            vyValue.setText("SpeedY: " + vySlider.getValue());
             bodyWrappers.get(num).updateArrow();
 
-            runTimeDataTab.updateValues(bodyWrappers);
+            runTimeDataTab.updateValues();
         };
 
         ChangeListener<Number> vcListener = (obs, old, newVal) -> {
@@ -118,7 +118,7 @@ public class DataInputBox extends VBox {
 
             bodyWrappers.get(num).updateArrow();
 
-            runTimeDataTab.updateValues(bodyWrappers);
+            runTimeDataTab.updateValues();
         };
 
 
@@ -130,30 +130,30 @@ public class DataInputBox extends VBox {
         massSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             double m = this.getMass();
             bodyWrappers.get(num).getBody().setMass(m);
-            massValue.setText("Mass: " + String.valueOf(m));
+            massValue.setText("Mass: " + m);
             bodyWrappers.get(num).updateArrow();
-            runTimeDataTab.updateValues(bodyWrappers);
+            runTimeDataTab.updateValues();
         });
         centerXSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             Vector C = this.getCenter();
             bodyWrappers.get(num).getBody().setCenter(C);
-            centerXValue.setText("CenterX: " + String.valueOf(C.getX()));
+            centerXValue.setText("CenterX: " + C.getX());
             bodyWrappers.get(num).updateArrow();
-            runTimeDataTab.updateValues(bodyWrappers);
+            runTimeDataTab.updateValues();
         });
         centerYSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             Vector C = this.getCenter();
             bodyWrappers.get(num).getBody().setCenter(C);
-            centerYValue.setText("CenterY: " + String.valueOf(C.getY()));
+            centerYValue.setText("CenterY: " + C.getY());
             bodyWrappers.get(num).updateArrow();
-            runTimeDataTab.updateValues(bodyWrappers);
+            runTimeDataTab.updateValues();
         });
         radiusSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             double r = this.getRadius();
             bodyWrappers.get(num).getBody().setRad(r);
-            radiusValue.setText("Radius: " + String.valueOf(r));
+            radiusValue.setText("Radius: " + r);
             bodyWrappers.get(num).updateArrow();
-            runTimeDataTab.updateValues(bodyWrappers);
+            runTimeDataTab.updateValues();
         });
 
 
@@ -199,12 +199,25 @@ public class DataInputBox extends VBox {
     public Vector getCenter() { return new Vector(centerXSlider.getValue(), centerYSlider.getValue()); }
     public double getRadius() { return radiusSlider.getValue(); }
 
-    public List<Slider> getSliders()
+    public void disableAllSliders()
     {
-        return List.of(
-            speedSlider, angleSlider,
-            vxSlider, vySlider,
-            massSlider, radiusSlider,
-            centerXSlider, centerYSlider);
+        speedSlider.setDisable(true);
+        angleSlider.setDisable(true);
+        vxSlider.setDisable(true);
+        vySlider.setDisable(true);
+        massSlider.setDisable(true);
+        radiusSlider.setDisable(true);
+        centerXSlider.setDisable(true);
+        centerYSlider.setDisable(true);
+
     }
+
+    public Slider getSpeedSlider(){return speedSlider;}
+    public Slider getAngleSlider(){return angleSlider;}
+    public Slider getVxSlider(){return vxSlider;}
+    public Slider getVySlider(){return vySlider;}
+    public Slider getMassSlider(){return massSlider;}
+    public Slider getRadiusSlider(){return radiusSlider;}
+    public Slider getCenterXSlider(){return centerXSlider;}
+    public Slider getCenterYSlider(){return centerYSlider;}
 }

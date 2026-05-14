@@ -16,21 +16,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Timeloop{
-    List<BodyWrapper> bodyWrappers = new ArrayList<>();
+    List<BodyWrapper> bodyWrappers;
     private final PhysicsEngine physicsEngine = new PhysicsEngine();
+    private List<Body> bodies;
     private Timeline timeloop;
 
     public Timeloop(List<BodyWrapper> bodyWrappers, RunTimeDataTab runTimeDataTab, Pane world)
     {
         this.bodyWrappers = bodyWrappers;
 
+
         this.timeloop = new Timeline(
                 new KeyFrame(Duration.millis((double) 1000 /Constants.fps), e ->{
-                    List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
+
+                    if(bodies == null) bodies = this.bodyWrappers.stream().map(BodyWrapper::getBody).toList();
                     FadeProperty.addFadeToBodies(bodies, world);
                     physicsEngine.updateVerletWithAdaptiveTimeStep(bodies);
                     bodyWrappers.forEach(BodyWrapper::updateArrow);
-                    runTimeDataTab.updateValues(bodyWrappers);
+                    runTimeDataTab.updateValues();
                 })
         );
         timeloop.setCycleCount(Animation.INDEFINITE);
@@ -46,6 +49,11 @@ public class Timeloop{
             timeloop.stop();
         else
             timeloop.play();
+    }
+    public void resetAll()
+    {
+        bodyWrappers.clear();
+        bodies = null;
     }
 
     public void initializeAccelerations(List<Body> bodies)

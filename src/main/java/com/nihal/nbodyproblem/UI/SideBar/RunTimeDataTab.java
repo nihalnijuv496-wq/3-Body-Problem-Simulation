@@ -14,6 +14,7 @@ public class RunTimeDataTab extends VBox {
     List<DataDisplayBox> dataDisplayBoxes = new ArrayList<>();
     Label totalSystemEnergyHeader;
     Label totalSystemEnergyValue;
+    List<Body> bodies = new ArrayList<>();
 
     public RunTimeDataTab()
     {
@@ -34,7 +35,7 @@ public class RunTimeDataTab extends VBox {
 
         DataDisplayBox(Body body, List<BodyWrapper> bodyWrappers)
         {
-            Label BodyHeader = new Label("Body " + String.valueOf(bodyWrappers.size()));
+            Label BodyHeader = new Label("Body " + bodyWrappers.size());
             Label velocityHeader = new Label("Velocity: ");
             Label positionHeader = new Label("Position: ");
             Label KEHeader = new Label("Kinetic Energy: ");
@@ -42,14 +43,15 @@ public class RunTimeDataTab extends VBox {
             Label TEHeader = new Label("Total Energy: ");
 
 
-            List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
+
+            bodies.add(body);
             double kineticEnergy = body.getKineticEnergy();
-            double potentialEnergy = body.getPotentialEnergy(bodies);
+            double potentialEnergy = body.getPotentialEnergy(bodies);/*hjbdwdcbkwjuwujwbiwbik*/
             double totalEnergy = kineticEnergy + potentialEnergy;
             velocityValue = new Label(
-                    "(" + String.valueOf(body.getVelocity().magn()) + ", " + String.valueOf(Math.toDegrees(body.getVelocity().getAngle()) + ")")
-                        + " = ( " +  String.valueOf(body.getVelocity().getX()) + ", " + String.valueOf( body.getVelocity().getY()) + ")");
-            positionValue = new Label("(" + String.valueOf(body.getCenter().getX()) + String.valueOf(body.getCenter().getY()) + ")");
+                    "(" + body.getVelocity().magn() + ", " + Math.toDegrees(body.getVelocity().getAngle()) + ")"
+                            + " = ( " + body.getVelocity().getX() + ", " + body.getVelocity().getY() + ")");
+            positionValue = new Label("(" + body.getCenter().getX() + body.getCenter().getY() + ")");
             KEValue = new Label(String.valueOf(kineticEnergy));
             PEValue = new Label(String.valueOf(potentialEnergy));
             TEValue = new Label(String.valueOf(totalEnergy));
@@ -87,23 +89,23 @@ public class RunTimeDataTab extends VBox {
         getChildren().add(dataDisplayBoxes.getLast());
         totalSystemEnergyHeader.toFront();
         totalSystemEnergyValue.toFront();
-        updateValues(bodyWrappers);
+        updateValues();
     }
 
-    public void updateValues(List<BodyWrapper> bodyWrappers)
+    public void updateValues()
     {
-        List<Body> bodies = bodyWrappers.stream().map(BodyWrapper::getBody).toList();
+
         double totalSystemKE = 0;
         double totalSystemPE = 0;
 
-        for (int i = 0; i < bodyWrappers.size(); ++i)
+        for (int i = 0; i < bodies.size(); ++i)
         {
             Body body = bodies.get(i);
             DataDisplayBox db = dataDisplayBoxes.get(i);
             db.velocityValue.setText(
-                    "(" + String.valueOf(body.getVelocity().magn()) + ", " + String.valueOf(Math.toDegrees(body.getVelocity().getAngle()) + ")")
-                            + " = ( " +  String.valueOf(body.getVelocity().getX()) + ", " + String.valueOf( body.getVelocity().getY()) + ")");
-            db.positionValue.setText("(" + String.valueOf(body.getCenter().getX()) + String.valueOf(body.getCenter().getY()) + ")");
+                    "(" + body.getVelocity().magn() + ", " + Math.toDegrees(body.getVelocity().getAngle()) + ")"
+                            + " = ( " + body.getVelocity().getX() + ", " + body.getVelocity().getY() + ")");
+            db.positionValue.setText("(" + body.getCenter().getX() + body.getCenter().getY() + ")");
 
             double kineticEnergy = body.getKineticEnergy();
             double potentialEnergy = body.getPotentialEnergy(bodies);
@@ -124,6 +126,7 @@ public class RunTimeDataTab extends VBox {
     {
         dataDisplayBoxes.clear();
         getChildren().clear();
+        bodies.clear();
         totalSystemEnergyValue = new Label("0");
         totalSystemEnergyHeader = new Label("Total System Energy: ");
         totalSystemEnergyValue.getStyleClass().add("header-label");

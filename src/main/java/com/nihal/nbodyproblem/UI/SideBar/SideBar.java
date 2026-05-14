@@ -116,7 +116,6 @@ public class SideBar extends ScrollPane {
         tabBar.getChildren().clear();
         sidebarContentArea.getChildren().clear();
         setPresets(bodyWrappers, world);
-        PresetUtils.resetAll();
 
     }
 
