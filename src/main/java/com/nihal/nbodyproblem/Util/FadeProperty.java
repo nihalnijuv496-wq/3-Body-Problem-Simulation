@@ -1,49 +1,50 @@
 package com.nihal.nbodyproblem.Util;
 
 import com.nihal.nbodyproblem.Body.Body;
-import javafx.animation.FadeTransition;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
 
 import java.util.List;
 
 public class FadeProperty {
-    private static final int fadeTimeInMillis = 5000;
 
-    private static Circle copy(Body body)
+    Circle[] trailingCircles = new Circle[Constants.trailingCirclesCount];
+    Color color;
+
+    public FadeProperty(double x, double y, Pane world, Body body, int i)
     {
-        Circle bodyCopy = new Circle();
-        bodyCopy.setCenterX(body.getCenterX());
-        bodyCopy.setCenterY(body.getCenterY());
-        bodyCopy.setRadius(2.0);
-        Color bodyColor = (Color) body.getFill();
-
-        Color newColor = new Color(
-                Math.min(1, bodyColor.getRed() + 0.35),
-                Math.min(1, bodyColor.getGreen() + 0.35),
-                Math.min(1, bodyColor.getBlue() + 0.35), 1.0);
-        bodyCopy.setFill(newColor);
-        return bodyCopy;
+        setColor(body ,i);
+        for(int j = 0; j < Constants.trailingCirclesCount; ++j)
+        {
+            Circle c = new Circle();
+            c.setFill(color);
+            c.setOpacity(1.0 - (((double) (j +1)) / ((double) Constants.trailingCirclesCount)));
+            c.setRadius(Constants.trailRadius);
+            c.setCenterX(x);
+            c.setCenterY(y);
+            trailingCircles[j] = c;
+            world.getChildren().add(c);
+        }
     }
 
-    public static void addFadeToBodies(List<Body> bodies, Pane world)
+    public static void updateTrail(List<Body> bodies, Pane world)
     {
-        for (Body body: bodies)
+        for(Body body: bodies)
         {
-            Circle bodyCopy = copy(body);
-            FadeTransition fade = new FadeTransition(Duration.millis(fadeTimeInMillis), bodyCopy);
-            fade.setFromValue(1.0);
-            fade.setToValue(0.0);
-
-            fade.setOnFinished(e ->
+            FadeProperty trail = body.getTrail();
+            for(int i = 0; i < Constants.trailingCirclesCount - 1; ++i)
             {
-                world.getChildren().remove(bodyCopy);
-            });
-
-            world.getChildren().add(bodyCopy);
-            fade.play();
+                int currPos = Constants.trailingCirclesCount - 1 - i;
+                trail.trailingCircles[currPos].setCenterX(trail.trailingCircles[currPos - 1].getCenterX());
+                trail.trailingCircles[currPos].setCenterY(trail.trailingCircles[currPos - 1].getCenterY());
+            }
+            trail.trailingCircles[0].setCenterX(body.getCenterX());
+            trail.trailingCircles[0].setCenterY(body.getCenterY());
         }
+    }
+    public void setColor(Body body, int i)
+    {
+        this.color = Constants.trailColors[i];
     }
 }

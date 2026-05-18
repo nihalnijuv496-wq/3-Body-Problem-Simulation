@@ -47,9 +47,9 @@ public class StartAnimation extends Application {
             if (numOfBodies[0] == Constants.N)
                 return;
 
-            sideBar.addNewTab( numOfBodies[0], bodyWrappers, event.getX(), event.getY());
-            bodyWrappers.add(new BodyWrapper(new Body(event.getX(), event.getY(), sideBar.getLastDataInputBox())));
-            bodyWrappers.getLast().getBody().setFill(Constants.bodyColors[numOfBodies[0]]);
+            sideBar.addNewTab(numOfBodies[0], bodyWrappers, event.getX(), event.getY());
+            bodyWrappers.add(new BodyWrapper(new Body(event.getX(), event.getY(), sideBar.getLastDataInputBox(), world, numOfBodies[0])));
+
             world.getChildren().add(bodyWrappers.getLast());
             sideBar.addRunTimeDataField(numOfBodies[0], bodyWrappers);
             numOfBodies[0]++;
@@ -73,7 +73,7 @@ public class StartAnimation extends Application {
             world.getChildren().add(buttonKey);
 
 
-        //=================================================/
+        //-----------------------------------------------
 
 
         sideBar.setPrefWidth(Constants.sideBarWidth);

@@ -37,11 +37,12 @@ public class Lagrange {
 
         for (int i = 0; i < Constants.N; ++i)
         {
-            Point2D scenePoint = world.localToScene(bodyPositions[i].getX(), bodyPositions[i].getY());
+            Point2D screenPoint = world.localToScreen(bodyPositions[i].getX(), bodyPositions[i].getY());
+
             MouseEvent event = new MouseEvent(
                     MouseEvent.MOUSE_CLICKED,                                   // event type
-                    bodyPositions[i].getX(), bodyPositions[i].getY(),           // nodeX, nodeY
-                    scenePoint.getX(), scenePoint.getY(),                       // screenX, screenY
+                    bodyPositions[i].getX() + Constants.sideBarWidth, bodyPositions[i].getY(),           // nodeX, nodeY
+                    screenPoint.getX(), screenPoint.getY(),                       // screenX, screenY
                     MouseButton.PRIMARY,                                        // button
                     1,                                                          // click count
                     false, false, false, false,                     // shift, ctrl, alt, meta

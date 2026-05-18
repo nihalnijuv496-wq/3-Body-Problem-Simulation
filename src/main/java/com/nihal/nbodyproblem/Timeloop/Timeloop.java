@@ -12,7 +12,6 @@ import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Timeloop{
@@ -30,7 +29,7 @@ public class Timeloop{
                 new KeyFrame(Duration.millis((double) 1000 /Constants.fps), e ->{
 
                     if(bodies == null) bodies = this.bodyWrappers.stream().map(BodyWrapper::getBody).toList();
-                    FadeProperty.addFadeToBodies(bodies, world);
+                    FadeProperty.updateTrail(bodies, world);
                     physicsEngine.updateVerletWithAdaptiveTimeStep(bodies);
                     bodyWrappers.forEach(BodyWrapper::updateArrow);
                     runTimeDataTab.updateValues();

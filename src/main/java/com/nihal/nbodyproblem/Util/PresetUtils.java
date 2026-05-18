@@ -31,6 +31,7 @@ public class PresetUtils {
                 new Vector(defaultCMassX, defaultCMassY - triangleSide/Math.sqrt(3)),
                 new Vector(defaultCMassX +triangleSide/2, defaultCMassY +triangleSide/(2*Math.sqrt(3))),
                 new Vector(defaultCMassX -triangleSide/2, defaultCMassY +triangleSide/(2*Math.sqrt(3))));
+
     }
 
     public static Vector getVelocityForEquilateralTriangleSolution(double triangleSide, List<Body> bodies, int bodyI)

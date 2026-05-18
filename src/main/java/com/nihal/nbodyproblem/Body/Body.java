@@ -1,7 +1,9 @@
 package com.nihal.nbodyproblem.Body;
 import com.nihal.nbodyproblem.UI.SideBar.DataInputBox;
 import com.nihal.nbodyproblem.Util.Constants;
+import com.nihal.nbodyproblem.Util.FadeProperty;
 import com.nihal.nbodyproblem.Util.Vector;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
 import java.util.List;
@@ -19,7 +21,9 @@ public class Body extends Circle {
     private Vector initialAcceleration;
     private double initialMass;
 
-    public Body(double x,double y, DataInputBox dib)
+    private FadeProperty trail;
+
+    public Body(double x, double y, DataInputBox dib, Pane world, int i)
     {
 
 
@@ -31,8 +35,10 @@ public class Body extends Circle {
         setCenterX(center.getX());
         setCenterY(center.getY());
         setRadius(radius);
-
         initialVelocity = null;
+        setColor(this, i);
+
+        trail = new FadeProperty(x, y, world, this, i);
 
     }
 
@@ -101,7 +107,7 @@ public class Body extends Circle {
             if (this == b) continue;
             double r = this.center.sub(b.center).magn();
             if (r == 0) return Double.MAX_VALUE;
-            pe += -1*Constants.G * this.mass * b.mass / Math.sqrt(Math.pow(r, 2) + Math.pow(Constants.epsilon, 2));
+            pe += -1*Constants.G * this.mass * b.mass / Math.sqrt(r*r + Constants.epsilon*Constants.epsilon);
         }
         return pe;
     }
@@ -120,5 +126,10 @@ public class Body extends Circle {
     }
 
 
+    public void setColor(Body body, int i)
+    {
+        body.setFill(Constants.bodyColors[i]);
+    }
 
+    public FadeProperty getTrail(){ return trail; }
 }
