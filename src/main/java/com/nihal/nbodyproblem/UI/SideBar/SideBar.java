@@ -3,7 +3,6 @@ package com.nihal.nbodyproblem.UI.SideBar;
 import com.nihal.nbodyproblem.Body.BodyWrapper;
 import com.nihal.nbodyproblem.Presets.Presets;
 import com.nihal.nbodyproblem.Util.Constants;
-import com.nihal.nbodyproblem.Util.PresetUtils;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;

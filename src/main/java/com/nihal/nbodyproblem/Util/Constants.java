@@ -1,11 +1,9 @@
 package com.nihal.nbodyproblem.Util;
 
-
-import javafx.beans.value.ChangeListener;
 import javafx.scene.paint.Color;
 
 public class Constants {
-    public static final int N = 3;
+    public static final int N = 4;
     public static final int fps = 100;
     public static final double timeStep = 0.1;
 

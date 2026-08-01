@@ -1,7 +1,6 @@
 package com.nihal.nbodyproblem.Animate;
 
 import com.nihal.nbodyproblem.Body.BodyWrapper;
-import com.nihal.nbodyproblem.Body.BodyWrapper;
 import com.nihal.nbodyproblem.Timeloop.Timeloop;
 import com.nihal.nbodyproblem.UI.ButtonKey;
 import com.nihal.nbodyproblem.UI.CONTROLBUTTON;

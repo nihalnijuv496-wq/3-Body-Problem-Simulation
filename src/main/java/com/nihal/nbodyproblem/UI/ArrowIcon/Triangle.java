@@ -2,7 +2,6 @@ package com.nihal.nbodyproblem.UI.ArrowIcon;
 
 import com.nihal.nbodyproblem.Util.Vector;
 import javafx.collections.ObservableList;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 public class Triangle extends Polygon {
