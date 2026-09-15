@@ -1,0 +1,40 @@
+package com.nihal.nbodyproblem.Util;
+
+import javafx.scene.paint.Color;
+
+public final class ColorGenerator {
+    static Color[] getNColors(int n)
+    {
+        final Color[] colors = new Color[n];
+        final double goldenRatioConjugate = 0.618033988749895;
+        double hue = Math.random();
+
+        for (int i = 0; i < n; i++) {
+            hue += goldenRatioConjugate;
+            hue %= 1;
+
+            colors[i] = hslToRgbColor(hue, 0.65, 0.50);
+        }
+        return colors;
+    }
+
+    private static Color hslToRgbColor(double h, double s, double l) {
+        double q = l < 0.5 ? l * (1.0 + s) : l + s - l * s;
+        double p = 2.0 * l - q;
+
+        double r = hueToRgb(p, q, h + 1.0 / 3.0);
+        double g = hueToRgb(p, q, h);
+        double b = hueToRgb(p, q, h - 1.0 / 3.0);
+
+        return Color.color(r, g, b);
+    }
+
+    private static double hueToRgb(double p, double q, double t) {
+        if (t < 0.0) t += 1.0;
+        if (t > 1.0) t -= 1.0;
+        if (t < 1.0 / 6.0) return p + (q - p) * 6.0 * t;
+        if (t < 1.0 / 2.0) return q;
+        if (t < 2.0 / 3.0) return p + (q - p) * (2.0 / 3.0 - t) * 6.0;
+        return p;
+    }
+}
