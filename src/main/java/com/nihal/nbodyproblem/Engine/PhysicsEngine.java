@@ -15,7 +15,7 @@ public class PhysicsEngine {
 
     public void updateVerletWithAdaptiveTimeStepUpdate(List<Body> bodies, double adaptiveTimeStep)
     {
-        Vector[] oldAccs = new Vector[Constants.N];
+        Vector[] oldAccs = new Vector[bodies.size()];
         int i = 0;
         for (Body body: bodies)
         {

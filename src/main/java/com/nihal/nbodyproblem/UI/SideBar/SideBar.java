@@ -8,6 +8,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +23,7 @@ public class SideBar extends ScrollPane {
     VBox sidebarContentArea = new VBox(10);
     RunTimeDataTab runTimeDataTab;
     List<PresetButton> presetsButtons = new ArrayList<>();
-
-
-
-
-
+    VBox nInputBox = createNInputBox();
 
     public SideBar(List<BodyWrapper> bodyWrappers, Pane world)
     {
@@ -47,7 +46,7 @@ public class SideBar extends ScrollPane {
 
         runTimeDataTab = new RunTimeDataTab();
 
-        setPresets(bodyWrappers, world);
+        setInitialContent(bodyWrappers, world);
 
         VBox sideBarContent = new VBox(tabBar, sidebarContentArea);
 
@@ -81,10 +80,6 @@ public class SideBar extends ScrollPane {
         runTimeDataTab.addRunTimeData(bodyWrappers.get(i).getBody(), bodyWrappers);
     }
 
-
-
-
-
     public DataInputBox getLastDataInputBox(){ return dataInputBoxes.getLast();}
 
     public List<DataInputBox> getDataInputBoxes() {
@@ -114,8 +109,31 @@ public class SideBar extends ScrollPane {
         tabs.clear();
         tabBar.getChildren().clear();
         sidebarContentArea.getChildren().clear();
-        setPresets(bodyWrappers, world);
+        setInitialContent(bodyWrappers, world);
+    }
 
+    private VBox createNInputBox()
+    {
+        Label label = new Label("Number of bodies (N)");
+        TextField field = new TextField(String.valueOf(Constants.N));
+
+        field.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().matches("\\d{0,4}") ? change : null));
+
+        field.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal.isEmpty() && Integer.parseInt(newVal) > 0)
+                Constants.N = Integer.parseInt(newVal);
+        });
+
+        VBox box = new VBox(5, label, field);
+        box.getStyleClass().add("n-input-box");
+        return box;
+    }
+
+    private void setInitialContent(List<BodyWrapper> bodyWrappers, Pane world)
+    {
+        sidebarContentArea.getChildren().add(nInputBox);
+        setPresets(bodyWrappers, world);
     }
 
     public RunTimeDataTab getRunTimeDataTab() { return runTimeDataTab; }

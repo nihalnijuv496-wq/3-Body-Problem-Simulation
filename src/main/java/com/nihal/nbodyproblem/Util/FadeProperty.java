@@ -45,6 +45,6 @@ public class FadeProperty {
     }
     public void setColor(Body body, int i)
     {
-        this.color = Constants.trailColors[i];
+        this.color = ColorGenerator.getTrailColor(i);
     }
 }

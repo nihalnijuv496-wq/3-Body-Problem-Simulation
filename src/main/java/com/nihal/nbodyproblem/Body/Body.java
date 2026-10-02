@@ -1,5 +1,6 @@
 package com.nihal.nbodyproblem.Body;
 import com.nihal.nbodyproblem.UI.SideBar.DataInputBox;
+import com.nihal.nbodyproblem.Util.ColorGenerator;
 import com.nihal.nbodyproblem.Util.Constants;
 import com.nihal.nbodyproblem.Util.FadeProperty;
 import com.nihal.nbodyproblem.Util.Vector;
@@ -128,7 +129,7 @@ public class Body extends Circle {
 
     public void setColor(Body body, int i)
     {
-        body.setFill(Constants.bodyColors[i]);
+        body.setFill(ColorGenerator.getBodyColor(i));
     }
 
     public FadeProperty getTrail(){ return trail; }

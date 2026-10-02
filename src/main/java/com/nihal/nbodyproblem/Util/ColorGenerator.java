@@ -2,7 +2,26 @@ package com.nihal.nbodyproblem.Util;
 
 import javafx.scene.paint.Color;
 
+import java.util.Arrays;
+
 public final class ColorGenerator {
+
+    public static Color[] bodyColors = ColorGenerator.getNColors(Constants.N);
+    public static Color[] trailColors = ColorGenerator.getNTrailColors(bodyColors);
+
+    public static Color getBodyColor(int i)
+    {
+        if(i >= bodyColors.length) bodyColors = getNColors(Constants.N);
+        return  bodyColors[i];
+    }
+    public static Color getTrailColor(int i)
+    {
+        if(i >= trailColors.length) trailColors = getNTrailColors(bodyColors);
+        return  trailColors[i];
+    }
+
+
+
     static Color[] getNColors(int n)
     {
         final Color[] colors = new Color[n];
@@ -16,6 +35,14 @@ public final class ColorGenerator {
             colors[i] = hslToRgbColor(hue, 0.65, 0.50);
         }
         return colors;
+    }
+
+    static Color[] getNTrailColors(Color[] bodyColors)
+    {
+        return Arrays.stream(bodyColors).map(color -> new Color(
+                        Math.min(1, color.getRed() + 0.35),
+                        Math.min(1, color.getGreen() + 0.35),
+                        Math.min(1, color.getBlue() + 0.35), 1.0)).toArray(Color[]::new);
     }
 
     private static Color hslToRgbColor(double h, double s, double l) {
@@ -37,4 +64,7 @@ public final class ColorGenerator {
         if (t < 2.0 / 3.0) return p + (q - p) * (2.0 / 3.0 - t) * 6.0;
         return p;
     }
+
+
+
 }
