@@ -2,6 +2,7 @@ package com.nihal.nbodyproblem.UI.SideBar;
 
 import com.nihal.nbodyproblem.Body.Body;
 import com.nihal.nbodyproblem.Body.BodyWrapper;
+import com.nihal.nbodyproblem.Util.Vector;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -14,6 +15,19 @@ public class RunTimeDataTab extends VBox {
     Label totalSystemEnergyHeader;
     Label totalSystemEnergyValue;
     List<Body> bodies = new ArrayList<>();
+
+    private static String velocityText(Body body)
+    {
+        Vector v = body.getVelocity();
+        return String.format("(%.3f, %.2f° )\n=\n( %.3f, %.3f )",
+                v.magn(), Math.toDegrees(v.getAngle()), v.getX(), v.getY());
+    }
+
+    private static String positionText(Body body)
+    {
+        return String.format("( %.2f, %.2f )", body.getCenter().getX(), body.getCenter().getY());
+    }
+
 
     public RunTimeDataTab()
     {
@@ -45,12 +59,10 @@ public class RunTimeDataTab extends VBox {
 
             bodies.add(body);
             double kineticEnergy = body.getKineticEnergy();
-            double potentialEnergy = body.getPotentialEnergy(bodies);/*hjbdwdcbkwjuwujwbiwbik*/
+            double potentialEnergy = body.getPotentialEnergy(bodies);
             double totalEnergy = kineticEnergy + potentialEnergy;
-            velocityValue = new Label(
-                    "(" + body.getVelocity().magn() + ", " + Math.toDegrees(body.getVelocity().getAngle()) + ")"
-                            + " = ( " + body.getVelocity().getX() + ", " + body.getVelocity().getY() + ")");
-            positionValue = new Label("(" + body.getCenter().getX() + body.getCenter().getY() + ")");
+            velocityValue = new Label(velocityText(body));
+            positionValue = new Label(positionText(body));
             KEValue = new Label(String.valueOf(kineticEnergy));
             PEValue = new Label(String.valueOf(potentialEnergy));
             TEValue = new Label(String.valueOf(totalEnergy));
@@ -101,10 +113,8 @@ public class RunTimeDataTab extends VBox {
         {
             Body body = bodies.get(i);
             DataDisplayBox db = dataDisplayBoxes.get(i);
-            db.velocityValue.setText(
-                    "(" + body.getVelocity().magn() + ", " + Math.toDegrees(body.getVelocity().getAngle()) + ")"
-                            + " = ( " + body.getVelocity().getX() + ", " + body.getVelocity().getY() + ")");
-            db.positionValue.setText("(" + body.getCenter().getX() + body.getCenter().getY() + ")");
+            db.velocityValue.setText(velocityText(body));
+            db.positionValue.setText(positionText(body));
 
             double kineticEnergy = body.getKineticEnergy();
             double potentialEnergy = body.getPotentialEnergy(bodies);

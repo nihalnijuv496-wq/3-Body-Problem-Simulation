@@ -41,7 +41,7 @@ public class SideBar extends ScrollPane {
 
         setPrefWidth(Constants.sideBarWidth);
         setFitToWidth(true);
-        setFitToHeight(true);
+        //setFitToHeight(true);
         setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
