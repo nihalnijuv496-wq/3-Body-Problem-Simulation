@@ -1,6 +1,6 @@
 # N-Body Gravitational Simulator
 
-A JavaFX desktop simulation of the classical N-body gravitational problem. Place 3 bodies on a grid, configure their physical properties, and watch them interact under Newtonian gravity using Velocity Verlet integration.
+A JavaFX desktop simulation of the classical N-body gravitational problem. Place N bodies on a grid, configure their physical properties, and watch them interact under Newtonian gravity using Velocity Verlet integration.
 
 ---
 
@@ -25,24 +25,26 @@ A JavaFX desktop simulation of the classical N-body gravitational problem. Place
 
 ### Placing bodies manually
 
-1. **Place bodies** — click anywhere on the grid. Each click places one body at that position and opens a tab for it in the sidebar. You need exactly 3 bodies to start.
+1. **Enter N** — Enter desired N value
 
-2. **Configure each body** — select a body's tab in the sidebar to adjust:
+2. **Place bodies** — click anywhere on the grid. Each click places one body at that position and opens a tab for it in the sidebar. You need exactly N bodies to start.
+
+3. **Configure each body** — select a body's tab in the sidebar to adjust:
     - **Speed / Angle** — sets velocity direction intuitively (0° = right, 90° = up, 180° = left, 270° = down)
     - **SpeedX / SpeedY** — set velocity components directly; speed and angle update automatically
     - **Mass** — heavier bodies exert stronger gravitational pull
     - **Radius** — visual size only, does not affect physics
     - **Center** — reposition the body precisely using sliders
 
-3. **Start** — once all 3 bodies are placed, click Start/Pause to begin the simulation. Click again to pause.
+4. **Start** — once all N bodies are placed, click Start/Pause to begin the simulation. Click again to pause.
 
-4. **Restart** — resets all bodies to their positions, velocities, and properties at the moment Start was first clicked.
+5. **Restart** — resets all bodies to their positions, velocities, and properties at the moment Start was first clicked.
 
-5. **Reset** — clears everything so you can place new bodies from scratch.
+6. **Reset** — clears everything so you can place new bodies from scratch.
 
 ### Using presets
 
-Click a preset button in the sidebar (visible before any bodies are placed) to automatically configure all 3 bodies into a known stable configuration.
+Click a preset button in the sidebar (visible before any bodies are placed) to automatically configure all bodies into a known stable configuration.
 
 **Equilateral Triangle (Lagrange L4/L5)** — places 3 equal-mass bodies at the vertices of an equilateral triangle with velocities tuned for a circular orbit around their common centre of mass. Once loaded:
 - Most sliders are locked to preserve the solution's constraints
@@ -95,19 +97,40 @@ Constants (configurable in `Constants.java`):
 
 ```
 src/main/java/com/nihal/nbodyproblem/
-├── Animate/        — Application entry point and scene setup
-├── Body/           — Body and BodyWrapper (body + velocity arrow)
-├── Engine/         — Velocity Verlet physics engine
-├── Launcher/       — Main class
-├── Presets/        — Preset configurations (Lagrange equilateral triangle)
-├── Timeloop/       — JavaFX animation loop
+├── Animate/
+│   └── StartAnimation      — JavaFX Application: scene setup, world pane, click-to-add-body handling
+├── Body/
+│   ├── Body                — Circle body: mass, velocity, color, kinetic/potential energy
+│   └── BodyWrapper         — Body + its velocity arrow
+├── Engine/
+│   └── PhysicsEngine       — Velocity Verlet integrator with adaptive time step
+├── Launcher/
+│   └── Launcher            — Main class (launches StartAnimation)
+├── Presets/
+│   ├── Presets             — Enum of available presets + button text
+│   └── Lagrange            — Lagrange equilateral triangle preset
+├── Timeloop/
+│   └── Timeloop            — JavaFX animation loop driving the simulation
 ├── UI/
-│   ├── ArrowIcon/  — Velocity arrow (line + triangle arrowhead)
-│   ├── SideBar/    — Sidebar, tabs, per-body slider controls, runtime data tab, and preset buttons
-│   ├── ButtonKey   — Control buttons (Start, Restart, Reset)
-│   └── Grid        — Background grid
-└── Util/           — Vector math, simulation constants, preset helpers, and trail fade logic
+│   ├── ArrowIcon/
+│   │   ├── Arrow           — Velocity arrow (line + arrowhead)
+│   │   └── Triangle        — Arrowhead triangle
+│   ├── SideBar/
+│   │   ├── SideBar         — ScrollPane sidebar: tab bar, N input box, preset buttons
+│   │   ├── Tab             — Tab toggle button (one per body + runtime data)
+│   │   ├── DataInputBox    — Per-body sliders (position, velocity, mass)
+│   │   ├── RunTimeDataTab  — Live velocity, position and energy readout per body
+│   │   └── PresetButton    — Button that loads a preset
+│   ├── ButtonKey           — Control buttons (Start, Restart, Reset)
+│   ├── CONTROLBUTTON       — Enum for the control button types
+│   └── Grid                — Background grid
+└── Util/
+    ├── Vector              — 2D vector math
+    ├── Constants           — Simulation constants, N
+    ├── ColorGenerator      — Golden-ratio color generation for any N, lazily generated body/trail colors
+    ├── FadeProperty        — Trail fade logic and trail color
+    └── PresetUtils         — Preset loading and equilateral-triangle position/velocity helpers
 
 src/main/resources/
-└── Styles.css      — UI theme
+└── Styles.css              — UI theme
 ```
