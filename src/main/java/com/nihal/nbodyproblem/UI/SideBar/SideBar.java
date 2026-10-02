@@ -23,6 +23,7 @@ public class SideBar extends ScrollPane {
     VBox sidebarContentArea = new VBox(10);
     RunTimeDataTab runTimeDataTab;
     List<PresetButton> presetsButtons = new ArrayList<>();
+    TextField field;
     VBox nInputBox = createNInputBox();
 
     public SideBar(List<BodyWrapper> bodyWrappers, Pane world)
@@ -105,6 +106,7 @@ public class SideBar extends ScrollPane {
     public void resetAll(List<BodyWrapper> bodyWrappers, Pane world)
     {
         DataInputBox.totalNum = 0;
+        syncNField();
         dataInputBoxes.clear();
         tabs.clear();
         tabBar.getChildren().clear();
@@ -115,7 +117,7 @@ public class SideBar extends ScrollPane {
     private VBox createNInputBox()
     {
         Label label = new Label("Number of bodies (N)");
-        TextField field = new TextField(String.valueOf(Constants.N));
+        field = new TextField(String.valueOf(Constants.N));
 
         field.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().matches("\\d{0,4}") ? change : null));
@@ -123,6 +125,12 @@ public class SideBar extends ScrollPane {
         field.textProperty().addListener((obs, oldVal, newVal) -> {
             if (!newVal.isEmpty() && Integer.parseInt(newVal) > 0)
                 Constants.N = Integer.parseInt(newVal);
+        });
+        field.setOnAction(e -> {
+            String text = field.getText();
+            if (!text.isEmpty() && Integer.parseInt(text) > 0)
+                Constants.N = Integer.parseInt(text);
+            syncNField();
         });
 
         VBox box = new VBox(5, label, field);
@@ -137,4 +145,15 @@ public class SideBar extends ScrollPane {
     }
 
     public RunTimeDataTab getRunTimeDataTab() { return runTimeDataTab; }
+
+    public void setN(int n)
+    {
+        Constants.N = n;
+        syncNField();
+    }
+
+    public void syncNField()
+    {
+        field.setText(String.valueOf(Constants.N));
+    }
 }

@@ -25,7 +25,7 @@ public class Lagrange {
 
     public static void equilateralTriangleSolution(List<BodyWrapper> bodyWrappers, Pane world, SideBar sideBar)
     {
-        Constants.N = 3;
+        sideBar.setN(3);
         double triangleSide = 100;
 
         Vector[] bodyPositions = {

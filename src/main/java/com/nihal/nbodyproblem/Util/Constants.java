@@ -1,5 +1,6 @@
 package com.nihal.nbodyproblem.Util;
 
+import com.nihal.nbodyproblem.UI.SideBar.SideBar;
 import javafx.scene.paint.Color;
 
 import java.util.Arrays;
@@ -38,9 +39,4 @@ public class Constants {
 
     public static final double trailRadius = 2.0;
     public static final int trailingCirclesCount = 100;
-
-
-
-
-
 }
